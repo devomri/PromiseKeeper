@@ -6,30 +6,41 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.omri.dev.promisekeeper.Model.PromiseListItem;
+
+import java.util.List;
+import java.util.ArrayList;
+
 
 class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
-    private String mDataSet[];
+    private List<PromiseListItem> mDataSet;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView mTextView;
+        TextView mTitle;
+        TextView mDescription;
+        TextView mNextTime;
 
         ViewHolder(View view) {
             super(view);
 
-            mTextView = (TextView) view.findViewById(R.id.promise_item_name);
+            mTitle= (TextView) view.findViewById(R.id.promise_list_item_title);
+            mDescription = (TextView) view.findViewById(R.id.promise_list_item_description);
+            mNextTime = (TextView) view.findViewById(R.id.promise_list_item_next_time);
         }
     }
 
     PromisesAdapter() {
-        mDataSet = new String[2];
-        mDataSet[0] = "Test1";
-        mDataSet[1] = "Test2";
+        mDataSet = new ArrayList<PromiseListItem>();
+        mDataSet.add(new PromiseListItem("First promise",
+                                         "keeping my promises",
+                                         "01/01/2017",
+                                         "01/08/2017"));
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View promiseItemView =
-                LayoutInflater.from(parent.getContext()).inflate(R.layout.promise_item,
+                LayoutInflater.from(parent.getContext()).inflate(R.layout.promise_list_item,
                         parent, false);
 
         return new ViewHolder(promiseItemView);
@@ -37,11 +48,13 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mTextView.setText(mDataSet[position]);
+        holder.mTitle.setText(mDataSet.get(position).getmTitle());
+        holder.mDescription.setText(mDataSet.get(position).getmDescription());
+        holder.mNextTime.setText(mDataSet.get(position).getmPromiseNextTime());
     }
 
     @Override
     public int getItemCount() {
-        return mDataSet.length;
+        return mDataSet.size();
     }
 }
