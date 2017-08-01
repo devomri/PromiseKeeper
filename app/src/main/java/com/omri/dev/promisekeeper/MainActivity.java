@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView.LayoutManager mLayoutManager;
 
     private List<PromiseListItem> mFuturePromises;
-    private List<PromiseListItem> mFulfillesPromises;
+    private List<PromiseListItem> mFulfilledPromises;
     private List<PromiseListItem> mUnfulfilledPromises;
 
     @Override
@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity
                 "01/01/2017",
                 "01/09/2017"));
 
-        mFulfillesPromises = new ArrayList<>();
-        mFulfillesPromises.add(new PromiseListItem("Fulfilled Promise 1",
+        mFulfilledPromises = new ArrayList<>();
+        mFulfilledPromises.add(new PromiseListItem("Fulfilled Promise 1",
                                                     "This is the text of fulfilled promise 1",
                                                     "01/01/2001",
                                                     "01/02/2001"));
@@ -152,16 +152,16 @@ public class MainActivity extends AppCompatActivity
 
     private void loadFuturePromises() {
         setTitle(R.string.future_promises);
-        mAdapter.loadFuturePromises(mFuturePromises);
+        mAdapter.updatePromisesDataSet(mFuturePromises);
     }
 
     private void loadFulfilledPromises() {
         setTitle(R.string.fulfilled_promises);
-        mAdapter.loadFuturePromises(mFulfillesPromises);
+        mAdapter.updatePromisesDataSet(mFulfilledPromises);
     }
 
     private void loadUnfulfilledPromises() {
         setTitle(R.string.unfulfilled_promises);
-        mAdapter.loadFuturePromises(mUnfulfilledPromises);
+        mAdapter.updatePromisesDataSet(mUnfulfilledPromises);
     }
 }
