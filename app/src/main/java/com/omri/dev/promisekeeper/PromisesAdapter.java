@@ -6,24 +6,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * Created by omri on 5/3/17.
- */
 
-public class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
+class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
     private String mDataSet[];
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView mTextView;
+    static class ViewHolder extends RecyclerView.ViewHolder{
+        TextView mTextView;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
 
             mTextView = (TextView) view.findViewById(R.id.promise_item_name);
         }
     }
 
-    public PromisesAdapter() {
+    PromisesAdapter() {
         mDataSet = new String[2];
         mDataSet[0] = "Test1";
         mDataSet[1] = "Test2";
@@ -35,8 +32,7 @@ public class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHo
                 LayoutInflater.from(parent.getContext()).inflate(R.layout.promise_item,
                         parent, false);
 
-        ViewHolder vh = new ViewHolder(promiseItemView);
-        return vh;
+        return new ViewHolder(promiseItemView);
     }
 
     @Override
