@@ -85,14 +85,12 @@ public class MainActivity extends AppCompatActivity
                                                     "01/02/2001"));
 
         mUnfulfilledPromises = new ArrayList<>();
-        mUnfulfilledPromises.add(new PromiseListItem("Unfulfilled Promise 1",
-                "Not fulfilled 1",
-                "01/01/2001",
-                "01/02/2001"));
-        mUnfulfilledPromises.add(new PromiseListItem("Unfulfilled Promise 2",
-                "Not fulfilled 2",
-                "01/01/2001",
-                "01/02/2001"));
+        for (int i = 1; i <= 25; i++) {
+            mUnfulfilledPromises.add(new PromiseListItem("Unfulfilled Promise 1",
+                    "Not fulfilled 1",
+                    "01/01/2001",
+                    "01/02/2001"));
+        }
     }
 
     @Override
