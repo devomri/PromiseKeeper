@@ -24,8 +24,9 @@ public class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHo
     }
 
     public PromisesAdapter() {
-        mDataSet = new String[1];
-        mDataSet[0] = "Test";
+        mDataSet = new String[2];
+        mDataSet[0] = "Test1";
+        mDataSet[1] = "Test2";
     }
 
     @Override
