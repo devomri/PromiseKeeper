@@ -15,11 +15,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.omri.dev.promisekeeper.Model.PromiseListItem;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private PromisesAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+
+    private List<PromiseListItem> mFuturePromises;
+    private List<PromiseListItem> mFulfillesPromises;
+    private List<PromiseListItem> mUnfulfilledPromises;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +61,38 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new PromisesAdapter();
         mRecyclerView.setAdapter(mAdapter);
+
+        fetchPromisesFromDB();
+
+        loadFuturePromises();
+    }
+
+    private void fetchPromisesFromDB() {
+        mFuturePromises = new ArrayList<>();
+        mFuturePromises.add(new PromiseListItem("Future promise 1",
+                "I will try to keep my promises next time I promise them.",
+                "01/01/2017",
+                "01/08/2017"));
+        mFuturePromises.add(new PromiseListItem("Future promise 2",
+                "This is the second promise",
+                "01/01/2017",
+                "01/09/2017"));
+
+        mFulfillesPromises = new ArrayList<>();
+        mFulfillesPromises.add(new PromiseListItem("Fulfilled Promise 1",
+                                                    "This is the text of fulfilled promise 1",
+                                                    "01/01/2001",
+                                                    "01/02/2001"));
+
+        mUnfulfilledPromises = new ArrayList<>();
+        mUnfulfilledPromises.add(new PromiseListItem("Unfulfilled Promise 1",
+                "Not fulfilled 1",
+                "01/01/2001",
+                "01/02/2001"));
+        mUnfulfilledPromises.add(new PromiseListItem("Unfulfilled Promise 2",
+                "Not fulfilled 2",
+                "01/01/2001",
+                "01/02/2001"));
     }
 
     @Override
@@ -89,25 +130,40 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        switch(id) {
+            case R.id.nav_future_promises:
+                loadFuturePromises();
 
-        } else if (id == R.id.nav_slideshow) {
+                break;
+            case R.id.nav_fulfilled_promises:
+                loadFulfilledPromises();
 
-        } else if (id == R.id.nav_manage) {
+                break;
+            case R.id.nav_unfulfilled_promises:
+                loadUnfulfilledPromises();
 
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void loadFuturePromises() {
+        setTitle(R.string.future_promises);
+        mAdapter.loadFuturePromises(mFuturePromises);
+    }
+
+    private void loadFulfilledPromises() {
+        setTitle(R.string.fulfilled_promises);
+        mAdapter.loadFuturePromises(mFulfillesPromises);
+    }
+
+    private void loadUnfulfilledPromises() {
+        setTitle(R.string.unfulfilled_promises);
+        mAdapter.loadFuturePromises(mUnfulfilledPromises);
     }
 }

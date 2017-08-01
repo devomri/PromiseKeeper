@@ -30,11 +30,12 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
     }
 
     PromisesAdapter() {
-        mDataSet = new ArrayList<PromiseListItem>();
-        mDataSet.add(new PromiseListItem("First promise",
-                                         "keeping my promises",
-                                         "01/01/2017",
-                                         "01/08/2017"));
+        mDataSet = new ArrayList<>();
+    }
+
+    public void loadFuturePromises(List<PromiseListItem> futurePromises) {
+        mDataSet = futurePromises;
+        notifyDataSetChanged();
     }
 
     @Override

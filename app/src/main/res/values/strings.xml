@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">PromiseKeeper</string>
+    <string name="app_slogan">Never broke your word</string>
+
+    <string name="future_promises">Future Promises</string>
+    <string name="fulfilled_promises">Fulfilled Promises</string>
+    <string name="unfulfilled_promises">Unfulfilled Promises</string>
+    <string name="general">General</string>
+    <string name="about">About</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
