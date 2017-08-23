@@ -1,12 +1,14 @@
 package com.omri.dev.promisekeeper.Model;
 
+import java.io.Serializable;
+
 /**
  * Created by omri on 8/1/17.
  * This is the basic promise item which is shown in the main activity
  */
 
-public class PromiseListItem {
-    // Datra Members
+public class PromiseListItem{
+    // Data Members
     private String mTitle;
     private String mDescription;
     private String mCreateDate;

@@ -1,5 +1,7 @@
 package com.omri.dev.promisekeeper;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,14 +17,16 @@ import java.util.ArrayList;
 
 class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
     private List<PromiseListItem> mDataSet;
+    private Context context;
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    class ViewHolder extends RecyclerView.ViewHolder{
         TextView mTitle;
         TextView mDescription;
         TextView mNextTime;
 
         ViewHolder(View view) {
             super(view);
+            context = view.getContext();
 
             mTitle= (TextView) view.findViewById(R.id.promise_list_item_title);
             mDescription = (TextView) view.findViewById(R.id.promise_list_item_description);
@@ -49,7 +53,10 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 String title = ((TextView)v.findViewById(R.id.promise_list_item_title)).getText().toString();
-                Toast.makeText(parent.getContext(), title, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(parent.getContext(), title, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, PromiseDetailsActivity.class);
+                intent.putExtra("title", title);
+                context.startActivity(intent);
             }
         });
 
