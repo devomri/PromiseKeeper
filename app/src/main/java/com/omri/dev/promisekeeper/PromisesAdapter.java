@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.omri.dev.promisekeeper.Model.PromiseListItem;
 
@@ -22,7 +21,7 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
     class ViewHolder extends RecyclerView.ViewHolder{
         TextView mTitle;
         TextView mDescription;
-        TextView mNextTime;
+        TextView mNextDate;
 
         ViewHolder(View view) {
             super(view);
@@ -30,7 +29,7 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
 
             mTitle= (TextView) view.findViewById(R.id.promise_list_item_title);
             mDescription = (TextView) view.findViewById(R.id.promise_list_item_description);
-            mNextTime = (TextView) view.findViewById(R.id.promise_list_item_next_time);
+            mNextDate = (TextView) view.findViewById(R.id.promise_list_item_next_date);
         }
     }
 
@@ -53,9 +52,13 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 String title = ((TextView)v.findViewById(R.id.promise_list_item_title)).getText().toString();
-//                Toast.makeText(parent.getContext(), title, Toast.LENGTH_SHORT).show();
+                String nextDate = ((TextView)v.findViewById(R.id.promise_list_item_next_date)).getText().toString();
+                String description = ((TextView)v.findViewById(R.id.promise_list_item_description)).getText().toString();
+
                 Intent intent = new Intent(context, PromiseDetailsActivity.class);
                 intent.putExtra("title", title);
+                intent.putExtra("nextDate", nextDate);
+                intent.putExtra("description", description);
                 context.startActivity(intent);
             }
         });
@@ -67,7 +70,7 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mTitle.setText(mDataSet.get(position).getmTitle());
         holder.mDescription.setText(mDataSet.get(position).getmDescription());
-        holder.mNextTime.setText(mDataSet.get(position).getmPromiseNextTime());
+        holder.mNextDate.setText(mDataSet.get(position).getmPromiseNextTime());
     }
 
     @Override

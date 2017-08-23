@@ -86,7 +86,7 @@
     </RelativeLayout>
 
     <TextView
-        android:id="@+id/promise_list_item_next_time"
+        android:id="@+id/promise_list_item_next_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

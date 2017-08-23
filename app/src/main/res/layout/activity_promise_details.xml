@@ -25,7 +25,6 @@
                 android:id="@+id/promise_details_title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="This is the title"
                 android:textSize="18dp"/>
 
             <View
@@ -38,12 +37,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Create time:"
+                android:text="Promise next time:"
                 android:textStyle="bold"/>
             <TextView
+                android:id="@+id/promise_details_next_date"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="1/1/16"
                 android:layout_marginBottom="10dp"/>
 
             <TextView
@@ -52,9 +51,9 @@
                 android:text="Description:"
                 android:textStyle="bold"/>
             <TextView
+                android:id="@+id/promise_details_description"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="This is the promise description... it can take a while" />
+                android:layout_height="match_parent" />
 
         </LinearLayout>
     </ScrollView>
