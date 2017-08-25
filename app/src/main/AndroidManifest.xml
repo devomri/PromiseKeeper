@@ -26,7 +26,10 @@
         </activity>
         <activity
             android:name=".PromiseDetailsActivity"
-            android:label="@string/title_activity_promise_details"></activity>
+            android:label="@string/title_activity_promise_details" />
+        <activity
+            android:name=".CreatePromiseActivity"
+            android:label="@string/title_activity_create_promise"></activity>
     </application>
 
 </manifest>
