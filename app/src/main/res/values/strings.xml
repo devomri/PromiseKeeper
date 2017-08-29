@@ -27,4 +27,11 @@
         completions."
     </string>
     <string name="title_activity_create_promise">Make a promise</string>
+    
+    <string-array name="create_promise_repeat_array">
+        <item>No repeat</item>
+        <item>Daily</item>
+        <item>Monthly</item>
+        <item>Yearly</item>
+    </string-array>
 </resources>
