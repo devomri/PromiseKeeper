@@ -12,6 +12,7 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -24,6 +25,7 @@ import android.widget.TimePicker;
 
 import com.omri.dev.promisekeeper.Fragments.DatePickerFragment;
 import com.omri.dev.promisekeeper.Fragments.TimePickerFragment;
+import com.omri.dev.promisekeeper.Model.PromiseTypes;
 
 public class CreatePromiseActivity extends AppCompatActivity {
     private static final int PROMISE_LOCATION_REQUEST_CODE = 1;
@@ -115,15 +117,17 @@ public class CreatePromiseActivity extends AppCompatActivity {
     }
 
     public void chooseContactCall(View view) {
-        Intent pickContactIntent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts"));
-        pickContactIntent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
-        startActivityForResult(pickContactIntent, PICK_CONTACT_CALL_REQUEST);
+        startContactActivityForResult(PICK_CONTACT_CALL_REQUEST);
     }
 
     public void chooseContactGuard(View view) {
+        startContactActivityForResult(PICK_CONTACT_GUARD_REQUEST);
+    }
+
+    private void startContactActivityForResult(int pickContactCallRequest) {
         Intent pickContactIntent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts"));
-        pickContactIntent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
-        startActivityForResult(pickContactIntent, PICK_CONTACT_GUARD_REQUEST);
+        pickContactIntent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+        startActivityForResult(pickContactIntent, pickContactCallRequest);
     }
 
     @Override
@@ -165,6 +169,68 @@ public class CreatePromiseActivity extends AppCompatActivity {
         String number = cursor.getString(column);
 
         return number;
+    }
+
+    public void createNewPromise(View view) {
+        // Get promise filled data
+        String promiseTitle = mPromiseTitle.getText().toString();
+        String promiseDescription = mPromiseDescription.getText().toString();
+        String promiseBaseTime = mPromiseBaseTime.getText().toString();
+        String promiseGuardContact = mPromiseContactGuardText.getText().toString();
+        String promiseInterval = mPromiseRepeatSpinner.getSelectedItem().toString();
+        // TODO: choose wisely
+        int promiseType = mPromiseTypeGroup.getCheckedRadioButtonId();
+        String promiseLocation = mPromiseLocationText.getText().toString();
+        String promiseCallContact = mPromiseContactCallText.getText().toString();
+
+        // Reset error
+        mPromiseTitle.setError(null);
+        mPromiseDescription.setError(null);
+        mPromiseBaseTime.setError(null);
+
+        boolean isValid = true;
+        View focusView = null;
+
+        // Promise title validity
+        if (TextUtils.isEmpty(promiseTitle)) {
+            mPromiseTitle.setError(getString(R.string.create_promise_title_error));
+            isValid = false;
+            focusView = mPromiseTitle;
+        }
+
+        // Promise description validity
+        if (TextUtils.isEmpty(promiseDescription)) {
+            mPromiseDescription.setError(getString(R.string.create_promise_description_error));
+            isValid = false;
+            focusView = mPromiseDescription;
+        }
+
+        // Promise base time validity
+        if (promiseBaseTime.equals(getString(R.string.create_promise_base_time_default))) {
+            mPromiseBaseTime.setError(getString(R.string.create_promise_base_time_error));
+            isValid = false;
+            focusView = mPromiseBaseTime;
+        }
+
+        // Check location validity
+        if (promiseType == PromiseTypes.LOCATION.ordinal() &&
+                promiseLocation.equals(getString(R.string.create_promise_choose_location))) {
+            mPromiseLocationText.setError(getString(R.string.create_promise_choose_location));
+            isValid = false;
+            focusView = mPromiseLocationText;
+        }
+
+        // Check call contact validity
+        if (promiseType == PromiseTypes.CALL.ordinal() &&
+                promiseCallContact.equals(getString(R.string.create_promise_choose_contact_to_call))) {
+            mPromiseContactCallText.setError(getString(R.string.create_promise_choose_contact_to_call));
+            isValid = false;
+            focusView = mPromiseContactCallText;
+        }
+
+        if (!isValid) {
+            focusView.requestFocus();
+        }
     }
 }
 

@@ -14,25 +14,32 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_promise_details">Promise details</string>
 
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
     <string name="title_activity_create_promise">Make a promise</string>
 
     <string-array name="create_promise_repeat_array">
         <item>No repeat</item>
         <item>Daily</item>
+        <item>Weekly</item>
         <item>Monthly</item>
         <item>Yearly</item>
     </string-array>
     <string name="title_activity_get_location">Choose promise location</string>
+    <string name="create_promise_title_error">Promise name is mandatory</string>
+    <string name="create_promise_base_time_default">Pick a date</string>
+    <string name="create_promise_base_time_error">Please fill the base time</string>
+    <string name="create_promise_title_hint">Promise title</string>
+    <string name="create_promise_description_hint">Promise description</string>
+    <string name="create_promise_contact_guard_number_hint1">Contact guard number (optional)</string>
+    <string name="create_promise_contact_guard_number_hint2">Choose guard contact</string>
+    <string name="create_promise_repeat_interval">Repeat interval</string>
+    <string name="create_promise_choose_a_promise_type">Choose a promise type:</string>
+    <string name="create_promise_general">General</string>
+    <string name="create_promise_location_based">Location based</string>
+    <string name="create_promise_call_based">Call based</string>
+    <string name="create_promise_description_error">Please fill a promise description</string>
+    <string name="create_promise_promise_location">Promise location:</string>
+    <string name="create_promise_choose_location">Choose location</string>
+    <string name="create_promise_contact_call_number">Contact call number:</string>
+    <string name="create_promise_choose_contact_to_call">Choose contact to call</string>
+    <string name="create_promise_create_new_promise">Create new promise</string>
 </resources>

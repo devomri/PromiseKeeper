@@ -29,7 +29,7 @@
                     android:id="@+id/create_promise_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Promise title"
+                    android:hint="@string/create_promise_title_hint"
                     android:inputType="textCapSentences"
                     android:maxLines="1"/>
 
@@ -43,7 +43,7 @@
                     android:id="@+id/create_promise_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Promise description (optional)"
+                    android:hint="@string/create_promise_description_hint"
                     android:imeActionId="@+id/login"
                     android:inputType="textMultiLine|textCapSentences"/>
 
@@ -54,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 style="@android:style/Widget.DeviceDefault.Light.Spinner"
-                android:text="Pick a date"
+                android:text="@string/create_promise_base_time_default"
                 android:textSize="15dp"
                 android:onClick="chooseDateAndTime"/>
 
@@ -68,13 +68,13 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Contact guard number (optional)" />
+                android:text="@string/create_promise_contact_guard_number_hint1" />
             <TextView
                 android:id="@+id/create_promise_contact_guard_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 style="@android:style/Widget.DeviceDefault.Light.Spinner"
-                android:text="Choose guard contact"
+                android:text="@string/create_promise_contact_guard_number_hint2"
                 android:textSize="15dp"
                 android:onClick="chooseContactGuard" />
 
@@ -88,7 +88,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Repeat interval"/>
+                android:text="@string/create_promise_repeat_interval"/>
             <Spinner
                 android:id="@+id/create_promise_repeat_spinner"
                 android:layout_width="match_parent"
@@ -104,7 +104,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Choose a promise type:"/>
+                android:text="@string/create_promise_choose_a_promise_type"/>
 
             <RadioGroup
                 android:id="@+id/create_promise_rbgroup_type"
@@ -116,17 +116,17 @@
                     android:id="@+id/create_promise_rb_general"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="General" />
+                    android:text="@string/create_promise_general" />
                 <RadioButton
                     android:id="@+id/create_promise_rb_location"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Location based"/>
+                    android:text="@string/create_promise_location_based"/>
                 <RadioButton
                     android:id="@+id/create_promise_rb_call"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Call based"/>
+                    android:text="@string/create_promise_call_based"/>
 
             </RadioGroup>
 
@@ -146,13 +146,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Promise location:" />
+                    android:text="@string/create_promise_promise_location" />
                 <TextView
                     android:id="@+id/create_promise_location_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     style="@android:style/Widget.DeviceDefault.Light.Spinner"
-                    android:text="Choose location"
+                    android:text="@string/create_promise_choose_location"
                     android:textSize="15dp"
                     android:onClick="chooseLocation" />
             </LinearLayout>
@@ -166,13 +166,13 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Contact call number:" />
+                    android:text="@string/create_promise_contact_call_number" />
                 <TextView
                     android:id="@+id/create_promise_contact_call_text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     style="@android:style/Widget.DeviceDefault.Light.Spinner"
-                    android:text="Choose contact to call"
+                    android:text="@string/create_promise_choose_contact_to_call"
                     android:textSize="15dp"
                     android:onClick="chooseContactCall" />
             </LinearLayout>
@@ -183,8 +183,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Create"
-                android:textStyle="bold" />
+                android:text="@string/create_promise_create_new_promise"
+                android:textStyle="bold"
+                android:onClick="createNewPromise"/>
         </LinearLayout>
     </ScrollView>
 
