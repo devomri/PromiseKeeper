@@ -23,6 +23,8 @@ import com.omri.dev.promisekeeper.Fragments.DatePickerFragment;
 import com.omri.dev.promisekeeper.Fragments.TimePickerFragment;
 
 public class CreatePromiseActivity extends AppCompatActivity {
+    private static final int PROMISE_LOCATION_REQUEST_CODE = 1;
+
     private EditText mPromiseTitle;
     private EditText mPromiseDescription;
     private TextView mPromiseBaseTime;
@@ -97,11 +99,21 @@ public class CreatePromiseActivity extends AppCompatActivity {
     }
 
     public void chooseLocation(View view) {
-        Intent i = new Intent(getApplicationContext(), GetLocationActivity.class);
-        startActivity(i);
+        Intent getPromiseLocationIntent = new Intent(getApplicationContext(), GetLocationActivity.class);
+        startActivityForResult(getPromiseLocationIntent, PROMISE_LOCATION_REQUEST_CODE);
     }
 
     public void chooseContactCall(View view) {
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case PROMISE_LOCATION_REQUEST_CODE: {
+                String returnedLocation = data.getData().toString();
+                mPromiseLocatoionText.setText(returnedLocation);
+            }
+        }
     }
 }
 
