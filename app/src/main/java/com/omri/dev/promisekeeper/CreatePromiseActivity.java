@@ -5,6 +5,7 @@ package com.omri.dev.promisekeeper;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
@@ -96,6 +97,11 @@ public class CreatePromiseActivity extends AppCompatActivity {
     }
 
     public void chooseLocation(View view) {
+        Intent i = new Intent(getApplicationContext(), GetLocationActivity.class);
+        startActivity(i);
+    }
+
+    public void chooseContactCall(View view) {
     }
 }
 

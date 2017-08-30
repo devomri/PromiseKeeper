@@ -55,7 +55,7 @@
                 android:layout_height="match_parent"
                 style="@android:style/Widget.DeviceDefault.Light.Spinner"
                 android:text="Pick a date"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:onClick="chooseDateAndTime"/>
 
             <View
@@ -123,7 +123,7 @@
                 android:layout_height="match_parent"
                 style="@android:style/Widget.DeviceDefault.Light.Spinner"
                 android:text="Choose location"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:onClick="chooseLocation"
                 android:visibility="gone"/>
 
@@ -133,7 +133,7 @@
                 android:layout_height="match_parent"
                 style="@android:style/Widget.DeviceDefault.Light.Spinner"
                 android:text="Choose contact to call"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:onClick="chooseContactCall"
                 android:visibility="gone"/>
 
