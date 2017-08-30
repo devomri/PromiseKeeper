@@ -27,12 +27,14 @@ import com.omri.dev.promisekeeper.Fragments.TimePickerFragment;
 
 public class CreatePromiseActivity extends AppCompatActivity {
     private static final int PROMISE_LOCATION_REQUEST_CODE = 1;
-    private static final int PICK_CONTACT_REQUEST = 2;
+    private static final int PICK_CONTACT_CALL_REQUEST = 2;
+    private static final int PICK_CONTACT_GUARD_REQUEST = 3;
 
     private EditText mPromiseTitle;
     private EditText mPromiseDescription;
     private TextView mPromiseBaseTime;
     private Spinner mPromiseRepeatSpinner;
+    private TextView mPromiseContactGuardText;
     private RadioGroup mPromiseTypeGroup;
     private TextView mPromiseLocationText;
     private TextView mPromiseContactCallText;
@@ -48,6 +50,7 @@ public class CreatePromiseActivity extends AppCompatActivity {
         mPromiseDescription = (EditText)findViewById(R.id.create_promise_description);
         mPromiseBaseTime = (TextView) findViewById(R.id.create_promise_base_time);
         mPromiseRepeatSpinner = (Spinner)findViewById(R.id.create_promise_repeat_spinner);
+        mPromiseContactGuardText = (TextView)findViewById(R.id.create_promise_contact_guard_text);
         mPromiseTypeGroup = (RadioGroup)findViewById(R.id.create_promise_rbgroup_type);
         mPromiseLocationText = (TextView)findViewById(R.id.create_promise_location_text);
         mPromiseContactCallText = (TextView)findViewById(R.id.create_promise_contact_call_text);
@@ -114,7 +117,13 @@ public class CreatePromiseActivity extends AppCompatActivity {
     public void chooseContactCall(View view) {
         Intent pickContactIntent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts"));
         pickContactIntent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
-        startActivityForResult(pickContactIntent, PICK_CONTACT_REQUEST);
+        startActivityForResult(pickContactIntent, PICK_CONTACT_CALL_REQUEST);
+    }
+
+    public void chooseContactGuard(View view) {
+        Intent pickContactIntent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts"));
+        pickContactIntent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
+        startActivityForResult(pickContactIntent, PICK_CONTACT_GUARD_REQUEST);
     }
 
     @Override
@@ -127,22 +136,35 @@ public class CreatePromiseActivity extends AppCompatActivity {
 
                     break;
                 }
-                case PICK_CONTACT_REQUEST: {
-                    Uri contactUri = data.getData();
-                    String[] projection = {Phone.NUMBER};
+                case PICK_CONTACT_CALL_REQUEST: {
+                    String contactToCallNumber = getPhoneNumberFromData(data);
+                    mPromiseContactCallText.setText(contactToCallNumber);
 
-                    Cursor cursor = getContentResolver()
-                            .query(contactUri, projection, null, null, null);
-                    cursor.moveToFirst();
+                    break;
+                }
+                case PICK_CONTACT_GUARD_REQUEST: {
+                    String contactToCallNumber = getPhoneNumberFromData(data);
+                    mPromiseContactGuardText.setText(contactToCallNumber);
 
-                    // Retrieve the phone number from the NUMBER column
-                    int column = cursor.getColumnIndex(Phone.NUMBER);
-                    String number = cursor.getString(column);
-
-                    mPromiseContactCallText.setText(number);
+                    break;
                 }
             }
         }
+    }
+
+    private String getPhoneNumberFromData(Intent data) {
+        Uri contactUri = data.getData();
+        String[] projection = {Phone.NUMBER};
+
+        Cursor cursor = getContentResolver()
+                .query(contactUri, projection, null, null, null);
+        cursor.moveToFirst();
+
+        // Retrieve the phone number from the NUMBER column
+        int column = cursor.getColumnIndex(Phone.NUMBER);
+        String number = cursor.getString(column);
+
+        return number;
     }
 }
 

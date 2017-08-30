@@ -13,17 +13,23 @@ public class PromiseListItem{
     private String mDescription;
     private String mCreateDate;
     private String mPromiseNextTime;
+    private String mBaseTime;
+    private String mLocation;
+    private String mCallContactNumber;
+    private String mPromiseType;
 
     // Constructor
     public PromiseListItem(String title,
                            String description,
                            String createDate,
-                           String promiseNextTime) {
+                           String baseTime/*,
+                           String location,
+                           String callContactNumber,
+                           String mPromiseType*/) {
         this.mTitle = title;
         this.mDescription = description;
         this.mCreateDate = createDate;
-        this.mPromiseNextTime = promiseNextTime;
-
+        this.mBaseTime = baseTime;
     }
 
     public String getmTitle() {
@@ -56,5 +62,37 @@ public class PromiseListItem{
 
     public void setmPromiseNextTime(String mPromiseNextTime) {
         this.mPromiseNextTime = mPromiseNextTime;
+    }
+
+    public String getmBaseTime() {
+        return mBaseTime;
+    }
+
+    public void setmBaseTime(String mBaseTime) {
+        this.mBaseTime = mBaseTime;
+    }
+
+    public String getmLocation() {
+        return mLocation;
+    }
+
+    public void setmLocation(String mLocation) {
+        this.mLocation = mLocation;
+    }
+
+    public String getmCallContactNumber() {
+        return mCallContactNumber;
+    }
+
+    public void setmCallContactNumber(String mCallContactNumber) {
+        this.mCallContactNumber = mCallContactNumber;
+    }
+
+    public String getmPromiseType() {
+        return mPromiseType;
+    }
+
+    public void setmPromiseType(String mPromiseType) {
+        this.mPromiseType = mPromiseType;
     }
 }
