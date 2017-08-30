@@ -117,25 +117,45 @@
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"/>
 
-            <TextView
-                android:id="@+id/create_promise_location_text"
+            <LinearLayout
+                android:id="@+id/create_promise_location_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@android:style/Widget.DeviceDefault.Light.Spinner"
-                android:text="Choose location"
-                android:textSize="15dp"
-                android:onClick="chooseLocation"
-                android:visibility="gone"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Promise location:" />
+                <TextView
+                    android:id="@+id/create_promise_location_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@android:style/Widget.DeviceDefault.Light.Spinner"
+                    android:text="Choose location"
+                    android:textSize="15dp"
+                    android:onClick="chooseLocation" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/create_promise_contact_call_text"
+            <LinearLayout
+                android:id="@+id/create_promise_contact_call_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                style="@android:style/Widget.DeviceDefault.Light.Spinner"
-                android:text="Choose contact to call"
-                android:textSize="15dp"
-                android:onClick="chooseContactCall"
-                android:visibility="gone"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Contact call number:" />
+                <TextView
+                    android:id="@+id/create_promise_contact_call_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    style="@android:style/Widget.DeviceDefault.Light.Spinner"
+                    android:text="Choose contact to call"
+                    android:textSize="15dp"
+                    android:onClick="chooseContactCall" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/create_promise_button"
