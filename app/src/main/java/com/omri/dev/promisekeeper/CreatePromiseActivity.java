@@ -27,6 +27,8 @@ public class CreatePromiseActivity extends AppCompatActivity {
     private TextView mPromiseBaseTime;
     private Spinner mPromiseRepateSpinner;
     private RadioGroup mPromiseTypeGroup;
+    private TextView mPromiseLocatoionText;
+    private TextView mPromiseContactCallText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,8 @@ public class CreatePromiseActivity extends AppCompatActivity {
         mPromiseBaseTime = (TextView) findViewById(R.id.create_promise_base_time);
         mPromiseRepateSpinner = (Spinner)findViewById(R.id.create_promise_repeat_spinner);
         mPromiseTypeGroup = (RadioGroup)findViewById(R.id.create_promise_rbgroup_type);
+        mPromiseLocatoionText = (TextView)findViewById(R.id.create_promise_location_text);
+        mPromiseContactCallText = (TextView)findViewById(R.id.create_promise_contact_call_text);
 
         // Populate spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -50,17 +54,25 @@ public class CreatePromiseActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 switch (checkedId) {
                     case R.id.create_promise_rb_general:
-                        Toast.makeText(getApplicationContext(), "general", Toast.LENGTH_SHORT).show();
+                        setTextVisibility(View.GONE, View.GONE);
+
                         break;
                     case R.id.create_promise_rb_location:
-                        Toast.makeText(getApplicationContext(), "location", Toast.LENGTH_SHORT).show();
+                        setTextVisibility(View.VISIBLE, View.GONE);
+
                         break;
                     case R.id.create_promise_rb_call:
-                        Toast.makeText(getApplicationContext(), "call", Toast.LENGTH_SHORT).show();
+                        setTextVisibility(View.GONE, View.VISIBLE);
+
                         break;
                 }
             }
         });
+    }
+
+    private void setTextVisibility(int locationVisibility, int contactVisibility) {
+        mPromiseLocatoionText.setVisibility(locationVisibility);
+        mPromiseContactCallText.setVisibility(contactVisibility);
     }
 
     public void chooseDateAndTime(View view) {
@@ -81,6 +93,9 @@ public class CreatePromiseActivity extends AppCompatActivity {
             }
         });
         dateFragment.show(getFragmentManager(), "datePicker");
+    }
+
+    public void chooseLocation(View view) {
     }
 }
 
