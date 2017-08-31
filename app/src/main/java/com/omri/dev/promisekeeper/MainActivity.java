@@ -73,12 +73,26 @@ public class MainActivity extends AppCompatActivity
     private void fetchPromisesFromDB() {
         mFuturePromises = new ArrayList<>();
         mFuturePromises.add(new PromiseListItem(PromiseTypes.GENERAL,
-                "General future promise",
+                "General future promise 1",
                 "description for genral future promise",
                 "01/01/18",
                 "",
                 PromiseIntervals.NO_REPEAT,
                 "", ""));
+        mFuturePromises.add(new PromiseListItem(PromiseTypes.LOCATION,
+                "General future promise 2",
+                "description for genral future promise",
+                "01/01/18",
+                "",
+                PromiseIntervals.NO_REPEAT,
+                "(456,456)", ""));
+        mFuturePromises.add(new PromiseListItem(PromiseTypes.CALL,
+                "General future promise 3",
+                "description for genral future promise",
+                "01/01/18",
+                "",
+                PromiseIntervals.NO_REPEAT,
+                "", "5690650646"));
 
 
         mFulfilledPromises = new ArrayList<>();

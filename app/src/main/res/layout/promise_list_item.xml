@@ -57,10 +57,11 @@
                 android:src="@drawable/bg_circle" />
 
             <ImageView
+                android:id="@+id/promise_list_item_icon"
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:src="@drawable/ic_done_white" />
+                android:src="@android:drawable/ic_popup_reminder" />
         </RelativeLayout>
 
         <RelativeLayout

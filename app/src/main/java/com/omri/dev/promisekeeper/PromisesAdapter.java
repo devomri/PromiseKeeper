@@ -6,9 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.content.res.Resources;
 
 import com.omri.dev.promisekeeper.Model.PromiseListItem;
+import com.omri.dev.promisekeeper.Model.PromiseTypes;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -22,6 +25,7 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
         TextView mTitle;
         TextView mDescription;
         TextView mNextDate;
+        ImageView mIcon;
 
         ViewHolder(View view) {
             super(view);
@@ -30,6 +34,7 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
             mTitle= (TextView) view.findViewById(R.id.promise_list_item_title);
             mDescription = (TextView) view.findViewById(R.id.promise_list_item_description);
             mNextDate = (TextView) view.findViewById(R.id.promise_list_item_next_date);
+            mIcon = (ImageView)view.findViewById(R.id.promise_list_item_icon);
         }
     }
 
@@ -68,9 +73,19 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mTitle.setText(mDataSet.get(position).getmTitle());
-        holder.mDescription.setText(mDataSet.get(position).getmDescription());
-        holder.mNextDate.setText(mDataSet.get(position).getPromiseNextTime());
+        PromiseListItem currPromise = mDataSet.get(position);
+
+        holder.mTitle.setText(currPromise.getmTitle());
+        holder.mDescription.setText(currPromise.getmDescription());
+        holder.mNextDate.setText(currPromise.getPromiseNextTime());
+
+        if (currPromise.getmPromiseType() == PromiseTypes.GENERAL) {
+            holder.mIcon.setImageDrawable(context.getResources().getDrawable(android.R.drawable.ic_popup_reminder));
+        } else if (currPromise.getmPromiseType() == PromiseTypes.LOCATION) {
+            holder.mIcon.setImageDrawable(context.getResources().getDrawable(android.R.drawable.ic_dialog_map));
+        } else if (currPromise.getmPromiseType() == PromiseTypes.CALL) {
+            holder.mIcon.setImageDrawable(context.getResources().getDrawable(android.R.drawable.stat_sys_phone_call));
+        }
     }
 
     @Override
