@@ -70,7 +70,7 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mTitle.setText(mDataSet.get(position).getmTitle());
         holder.mDescription.setText(mDataSet.get(position).getmDescription());
-        holder.mNextDate.setText(mDataSet.get(position).getmPromiseNextTime());
+        holder.mNextDate.setText(mDataSet.get(position).getPromiseNextTime());
     }
 
     @Override

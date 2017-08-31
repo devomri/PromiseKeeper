@@ -29,7 +29,6 @@
             android:textSize="@dimen/msg_text_primary"
             android:textStyle="bold" />
 
-
         <TextView
             android:id="@+id/promise_list_item_description"
             android:layout_width="match_parent"

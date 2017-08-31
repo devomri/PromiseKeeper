@@ -16,7 +16,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.omri.dev.promisekeeper.Model.PromiseIntervals;
 import com.omri.dev.promisekeeper.Model.PromiseListItem;
+import com.omri.dev.promisekeeper.Model.PromiseTypes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,27 +72,33 @@ public class MainActivity extends AppCompatActivity
 
     private void fetchPromisesFromDB() {
         mFuturePromises = new ArrayList<>();
-        mFuturePromises.add(new PromiseListItem("Future promise 1",
-                "I will try to keep my promises next time I promise them.",
-                "01/01/2017",
-                "01/08/2017"));
-        mFuturePromises.add(new PromiseListItem("Future promise 2",
-                "This is the second promise",
-                "01/01/2017",
-                "01/09/2017"));
+        mFuturePromises.add(new PromiseListItem(PromiseTypes.GENERAL,
+                "General future promise",
+                "description for genral future promise",
+                "01/01/18",
+                "",
+                PromiseIntervals.NO_REPEAT,
+                "", ""));
+
 
         mFulfilledPromises = new ArrayList<>();
-        mFulfilledPromises.add(new PromiseListItem("Fulfilled Promise 1",
-                                                    "This is the text of fulfilled promise 1",
-                                                    "01/01/2001",
-                                                    "01/02/2001"));
+        mFulfilledPromises.add(new PromiseListItem(PromiseTypes.LOCATION,
+                "General fulfilled promise",
+                "description for fulfilled future promise",
+                "01/01/18",
+                "",
+                PromiseIntervals.DAILY,
+                "(45664,4546)", ""));
 
         mUnfulfilledPromises = new ArrayList<>();
         for (int i = 1; i <= 25; i++) {
-            mUnfulfilledPromises.add(new PromiseListItem("Unfulfilled Promise 1",
-                    "Not fulfilled 1",
-                    "01/01/2001",
-                    "01/02/2001"));
+            mUnfulfilledPromises.add(new PromiseListItem(PromiseTypes.CALL,
+                    "General unfulfilled promise " + i,
+                    "description for unfulfilled promise " + i,
+                    "01/01/18",
+                    "",
+                    PromiseIntervals.WEEKLY,
+                    "", "0555645564"));
         }
     }
 

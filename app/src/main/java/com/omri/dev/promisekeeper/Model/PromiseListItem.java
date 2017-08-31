@@ -1,7 +1,5 @@
 package com.omri.dev.promisekeeper.Model;
 
-import java.io.Serializable;
-
 /**
  * Created by omri on 8/1/17.
  * This is the basic promise item which is shown in the main activity
@@ -9,27 +7,44 @@ import java.io.Serializable;
 
 public class PromiseListItem{
     // Data Members
+    private PromiseTypes mPromiseType;
     private String mTitle;
     private String mDescription;
-    private String mCreateDate;
-    private String mPromiseNextTime;
     private String mBaseTime;
+    private String mExecuteTime; // Relevant for past promises
+    private String mGuardContactNumber;
+    private PromiseIntervals mPromiseInterval;
     private String mLocation;
     private String mCallContactNumber;
-    private String mPromiseType;
 
     // Constructor
-    public PromiseListItem(String title,
+    public PromiseListItem(PromiseTypes type,
+                           String title,
                            String description,
-                           String createDate,
-                           String baseTime/*,
+                           String baseTime,
+                           String guardContactNumber,
+                           PromiseIntervals promiseInterval,
                            String location,
-                           String callContactNumber,
-                           String mPromiseType*/) {
-        this.mTitle = title;
-        this.mDescription = description;
-        this.mCreateDate = createDate;
-        this.mBaseTime = baseTime;
+                           String callContactNumber) {
+        mPromiseType = type;
+        mTitle = title;
+        mDescription = description;
+        mBaseTime = baseTime;
+        mGuardContactNumber = guardContactNumber;
+        mPromiseInterval = promiseInterval;
+        mLocation = location;
+        mCallContactNumber = callContactNumber;
+
+        mExecuteTime = "";
+    }
+
+    // Properties
+    public PromiseTypes getmPromiseType() {
+        return mPromiseType;
+    }
+
+    public void setmPromiseType(PromiseTypes mPromiseType) {
+        this.mPromiseType = mPromiseType;
     }
 
     public String getmTitle() {
@@ -48,28 +63,28 @@ public class PromiseListItem{
         this.mDescription = mDescription;
     }
 
-    public String getmCreateDate() {
-        return mCreateDate;
-    }
-
-    public void setmCreateDate(String mCreateDate) {
-        this.mCreateDate = mCreateDate;
-    }
-
-    public String getmPromiseNextTime() {
-        return mPromiseNextTime;
-    }
-
-    public void setmPromiseNextTime(String mPromiseNextTime) {
-        this.mPromiseNextTime = mPromiseNextTime;
-    }
-
     public String getmBaseTime() {
         return mBaseTime;
     }
 
     public void setmBaseTime(String mBaseTime) {
         this.mBaseTime = mBaseTime;
+    }
+
+    public String getmGuardContactNumber() {
+        return mGuardContactNumber;
+    }
+
+    public void setmGuardContactNumber(String mGuardContactNumber) {
+        this.mGuardContactNumber = mGuardContactNumber;
+    }
+
+    public PromiseIntervals getmPromiseInterval() {
+        return mPromiseInterval;
+    }
+
+    public void setmPromiseInterval(PromiseIntervals mPromiseInterval) {
+        this.mPromiseInterval = mPromiseInterval;
     }
 
     public String getmLocation() {
@@ -88,11 +103,9 @@ public class PromiseListItem{
         this.mCallContactNumber = mCallContactNumber;
     }
 
-    public String getmPromiseType() {
-        return mPromiseType;
-    }
-
-    public void setmPromiseType(String mPromiseType) {
-        this.mPromiseType = mPromiseType;
+    // Methods
+    public String getPromiseNextTime() {
+        // TODO: implement
+        return "stub";
     }
 }

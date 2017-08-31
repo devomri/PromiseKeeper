@@ -25,7 +25,10 @@ import android.widget.TimePicker;
 
 import com.omri.dev.promisekeeper.Fragments.DatePickerFragment;
 import com.omri.dev.promisekeeper.Fragments.TimePickerFragment;
+import com.omri.dev.promisekeeper.Model.PromiseIntervals;
 import com.omri.dev.promisekeeper.Model.PromiseTypes;
+
+import static android.media.CamcorderProfile.get;
 
 public class CreatePromiseActivity extends AppCompatActivity {
     private static final int PROMISE_LOCATION_REQUEST_CODE = 1;
@@ -177,16 +180,38 @@ public class CreatePromiseActivity extends AppCompatActivity {
         String promiseDescription = mPromiseDescription.getText().toString();
         String promiseBaseTime = mPromiseBaseTime.getText().toString();
         String promiseGuardContact = mPromiseContactGuardText.getText().toString();
-        String promiseInterval = mPromiseRepeatSpinner.getSelectedItem().toString();
-        // TODO: choose wisely
-        int promiseType = mPromiseTypeGroup.getCheckedRadioButtonId();
         String promiseLocation = mPromiseLocationText.getText().toString();
         String promiseCallContact = mPromiseContactCallText.getText().toString();
+
+        int selectedPromiseTypeId = mPromiseTypeGroup.getCheckedRadioButtonId();
+        PromiseTypes promiseType = PromiseTypes.GENERAL;
+        if (selectedPromiseTypeId == R.id.create_promise_rb_location) {
+            promiseType = PromiseTypes.LOCATION;
+        } else if (selectedPromiseTypeId == R.id.create_promise_rb_call) {
+            promiseType = PromiseTypes.CALL;
+        }
+
+        String promiseIntervalString = mPromiseRepeatSpinner.getSelectedItem().toString();
+        PromiseIntervals promiseInterval;
+        String[] intervalsStringArray = getResources().getStringArray(R.array.create_promise_repeat_array);
+        if (promiseIntervalString.equals(intervalsStringArray[0])) {
+            promiseInterval = PromiseIntervals.NO_REPEAT;
+        } else if (promiseIntervalString.equals(intervalsStringArray[1])) {
+            promiseInterval = PromiseIntervals.DAILY;
+        } else if (promiseIntervalString.equals(intervalsStringArray[2])) {
+            promiseInterval = PromiseIntervals.WEEKLY;
+        } else if (promiseIntervalString.equals(intervalsStringArray[3])) {
+            promiseInterval = PromiseIntervals.MONTHLY;
+        } else if (promiseIntervalString.equals(intervalsStringArray[4])) {
+            promiseInterval = PromiseIntervals.YEARLY;
+        }
 
         // Reset error
         mPromiseTitle.setError(null);
         mPromiseDescription.setError(null);
         mPromiseBaseTime.setError(null);
+        mPromiseLocationText.setError(null);
+        mPromiseContactCallText.setError(null);
 
         boolean isValid = true;
         View focusView = null;
@@ -213,7 +238,7 @@ public class CreatePromiseActivity extends AppCompatActivity {
         }
 
         // Check location validity
-        if (promiseType == PromiseTypes.LOCATION.ordinal() &&
+        if (promiseType == PromiseTypes.LOCATION &&
                 promiseLocation.equals(getString(R.string.create_promise_choose_location))) {
             mPromiseLocationText.setError(getString(R.string.create_promise_choose_location));
             isValid = false;
@@ -221,7 +246,7 @@ public class CreatePromiseActivity extends AppCompatActivity {
         }
 
         // Check call contact validity
-        if (promiseType == PromiseTypes.CALL.ordinal() &&
+        if (promiseType == PromiseTypes.CALL &&
                 promiseCallContact.equals(getString(R.string.create_promise_choose_contact_to_call))) {
             mPromiseContactCallText.setError(getString(R.string.create_promise_choose_contact_to_call));
             isValid = false;
