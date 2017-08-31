@@ -13,6 +13,8 @@ import android.content.res.Resources;
 import com.omri.dev.promisekeeper.Model.PromiseListItem;
 import com.omri.dev.promisekeeper.Model.PromiseTypes;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -22,6 +24,7 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
     private Context context;
 
     class ViewHolder extends RecyclerView.ViewHolder{
+        TextView mID;
         TextView mTitle;
         TextView mDescription;
         TextView mNextDate;
@@ -31,6 +34,7 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
             super(view);
             context = view.getContext();
 
+            mID = (TextView)view.findViewById(R.id.promise_list_item_id);
             mTitle= (TextView) view.findViewById(R.id.promise_list_item_title);
             mDescription = (TextView) view.findViewById(R.id.promise_list_item_description);
             mNextDate = (TextView) view.findViewById(R.id.promise_list_item_next_date);
@@ -56,14 +60,18 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
         promiseItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String title = ((TextView)v.findViewById(R.id.promise_list_item_title)).getText().toString();
-                String nextDate = ((TextView)v.findViewById(R.id.promise_list_item_next_date)).getText().toString();
-                String description = ((TextView)v.findViewById(R.id.promise_list_item_description)).getText().toString();
+                int promiseID = Integer.parseInt(((TextView)v.findViewById(R.id.promise_list_item_id)).getText().toString());
+                PromiseListItem currPromise = mDataSet.get(promiseID);
 
                 Intent intent = new Intent(context, PromiseDetailsActivity.class);
-                intent.putExtra("title", title);
-                intent.putExtra("nextDate", nextDate);
-                intent.putExtra("description", description);
+                intent.putExtra("title", currPromise.getmTitle());
+                intent.putExtra("nextDate", currPromise.getPromiseNextTime());
+                intent.putExtra("description", currPromise.getmDescription());
+                intent.putExtra("type", currPromise.getmPromiseType().ordinal());
+                intent.putExtra("interval", currPromise.getmPromiseInterval().ordinal());
+                intent.putExtra("guardContact", currPromise.getmGuardContactNumber());
+                intent.putExtra("location", currPromise.getmLocation());
+                intent.putExtra("callContact", currPromise.getmCallContactNumber());
                 context.startActivity(intent);
             }
         });
@@ -75,6 +83,7 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         PromiseListItem currPromise = mDataSet.get(position);
 
+        holder.mID.setText(String.valueOf(position));
         holder.mTitle.setText(currPromise.getmTitle());
         holder.mDescription.setText(currPromise.getmDescription());
         holder.mNextDate.setText(currPromise.getPromiseNextTime());

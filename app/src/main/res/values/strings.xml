@@ -44,4 +44,9 @@
     <string name="create_promise_create_new_promise">Create new promise</string>
     <string name="promise_details_promise_next_time">Promise next time:</string>
     <string name="promise_details_description">Description:</string>
+    <string name="promise_details_promise_type">Promise type:</string>
+    <string name="promise_details_promise_repeat_interval">Promise repeat interval:</string>
+    <string name="promise_details_guard_contact_number">Guard contact number:</string>
+    <string name="promise_details_call_contact_number">Call contact number:</string>
+    <string name="promise_details_promise_location">Promise location:</string>
 </resources>

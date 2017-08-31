@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity
                 "General future promise 1",
                 "description for genral future promise",
                 "01/01/18",
-                "",
+                "06666666",
                 PromiseIntervals.NO_REPEAT,
                 "", ""));
         mFuturePromises.add(new PromiseListItem(PromiseTypes.LOCATION,
@@ -84,14 +84,14 @@ public class MainActivity extends AppCompatActivity
                 "description for genral future promise",
                 "01/01/18",
                 "",
-                PromiseIntervals.NO_REPEAT,
+                PromiseIntervals.DAILY,
                 "(456,456)", ""));
         mFuturePromises.add(new PromiseListItem(PromiseTypes.CALL,
                 "General future promise 3",
                 "description for genral future promise",
                 "01/01/18",
                 "",
-                PromiseIntervals.NO_REPEAT,
+                PromiseIntervals.YEARLY,
                 "", "5690650646"));
 
 
@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity
                 "description for fulfilled future promise",
                 "01/01/18",
                 "",
-                PromiseIntervals.DAILY,
+                PromiseIntervals.MONTHLY,
                 "(45664,4546)", ""));
 
         mUnfulfilledPromises = new ArrayList<>();

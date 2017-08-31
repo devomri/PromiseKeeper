@@ -20,6 +20,12 @@
         android:paddingRight="@dimen/padding_list_row">
 
         <TextView
+            android:id="@+id/promise_list_item_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <TextView
             android:id="@+id/promise_list_item_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
