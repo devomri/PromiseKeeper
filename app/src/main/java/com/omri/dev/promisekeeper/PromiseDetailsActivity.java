@@ -15,6 +15,7 @@ public class PromiseDetailsActivity extends Activity {
     private TextView promiseDescriptionTextView;
     private TextView promiseTypeTextView;
     private TextView promiseInterval;
+    private TextView promiseBaseTime;
     private LinearLayout promiseGuardContactLayout;
     private TextView promiseGuardContactTextView;
     private LinearLayout promiseCallContactLayout;
@@ -32,6 +33,7 @@ public class PromiseDetailsActivity extends Activity {
         promiseDescriptionTextView = (TextView) findViewById(R.id.promise_details_description);
         promiseTypeTextView = (TextView)findViewById(R.id.promise_details_promise_type);
         promiseInterval = (TextView)findViewById(R.id.promise_details_promise_interval);
+        promiseBaseTime = (TextView)findViewById(R.id.promise_details_promise_base_time);
         promiseGuardContactLayout = (LinearLayout)findViewById(R.id.promise_details_guard_contact_layout);
         promiseGuardContactTextView = (TextView)findViewById(R.id.promise_details_guard_contact);
         promiseCallContactLayout = (LinearLayout)findViewById(R.id.promise_details_call_contact_layout);
@@ -43,6 +45,7 @@ public class PromiseDetailsActivity extends Activity {
         promiseTitleTextView.setText(i.getStringExtra("title"));
         promiseNextDateTextView.setText(i.getStringExtra("nextDate"));
         promiseDescriptionTextView.setText(i.getStringExtra("description"));
+        promiseBaseTime.setText(i.getStringExtra("baseTime"));
 
         int promiseTypeInt = i.getIntExtra("type", 0);
         promiseTypeTextView.setText(PromiseEnumConvrsions.convertIntToPromiseType(promiseTypeInt));

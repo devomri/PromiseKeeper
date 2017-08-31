@@ -65,6 +65,7 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
 
                 Intent intent = new Intent(context, PromiseDetailsActivity.class);
                 intent.putExtra("title", currPromise.getmTitle());
+                intent.putExtra("baseTime", currPromise.getmBaseTime());
                 intent.putExtra("nextDate", currPromise.getPromiseNextTime());
                 intent.putExtra("description", currPromise.getmDescription());
                 intent.putExtra("type", currPromise.getmPromiseType().ordinal());

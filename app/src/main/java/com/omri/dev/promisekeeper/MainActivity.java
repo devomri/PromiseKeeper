@@ -75,45 +75,47 @@ public class MainActivity extends AppCompatActivity
         mFuturePromises.add(new PromiseListItem(PromiseTypes.GENERAL,
                 "General future promise 1",
                 "description for genral future promise",
-                "01/01/18",
+                "01/01/2018 13:05",
                 "06666666",
                 PromiseIntervals.NO_REPEAT,
                 "", ""));
-        mFuturePromises.add(new PromiseListItem(PromiseTypes.LOCATION,
+        PromiseListItem pl1 = new PromiseListItem(PromiseTypes.LOCATION,
                 "General future promise 2",
                 "description for genral future promise",
-                "01/01/18",
+                "02/08/2017 07:15",
                 "",
                 PromiseIntervals.DAILY,
-                "(456,456)", ""));
-        mFuturePromises.add(new PromiseListItem(PromiseTypes.CALL,
-                "General future promise 3",
-                "description for genral future promise",
-                "01/01/18",
-                "",
-                PromiseIntervals.YEARLY,
-                "", "5690650646"));
-
-
-        mFulfilledPromises = new ArrayList<>();
-        mFulfilledPromises.add(new PromiseListItem(PromiseTypes.LOCATION,
-                "General fulfilled promise",
-                "description for fulfilled future promise",
-                "01/01/18",
-                "",
-                PromiseIntervals.MONTHLY,
-                "(45664,4546)", ""));
-
-        mUnfulfilledPromises = new ArrayList<>();
-        for (int i = 1; i <= 25; i++) {
-            mUnfulfilledPromises.add(new PromiseListItem(PromiseTypes.CALL,
-                    "General unfulfilled promise " + i,
-                    "description for unfulfilled promise " + i,
-                    "01/01/18",
-                    "",
-                    PromiseIntervals.WEEKLY,
-                    "", "0555645564"));
-        }
+                "(456,456)", "");
+        pl1.setmExecuteTime("02/09/2017 07:15");
+        mFuturePromises.add(pl1);
+//        mFuturePromises.add(new PromiseListItem(PromiseTypes.CALL,
+//                "General future promise 3",
+//                "description for genral future promise",
+//                "01/01/2018",
+//                "",
+//                PromiseIntervals.YEARLY,
+//                "", "5690650646"));
+//
+//
+//        mFulfilledPromises = new ArrayList<>();
+//        mFulfilledPromises.add(new PromiseListItem(PromiseTypes.LOCATION,
+//                "General fulfilled promise",
+//                "description for fulfilled future promise",
+//                "01/01/2017",
+//                "",
+//                PromiseIntervals.MONTHLY,
+//                "(45664,4546)", ""));
+//
+//        mUnfulfilledPromises = new ArrayList<>();
+//        for (int i = 1; i <= 25; i++) {
+//            mUnfulfilledPromises.add(new PromiseListItem(PromiseTypes.CALL,
+//                    "General unfulfilled promise " + i,
+//                    "description for unfulfilled promise " + i,
+//                    "01/01/2017",
+//                    "",
+//                    PromiseIntervals.WEEKLY,
+//                    "", "0555645564"));
+//        }
     }
 
     @Override

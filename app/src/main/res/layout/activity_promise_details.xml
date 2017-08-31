@@ -48,6 +48,17 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/promise_details_promise_base_time"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/promise_details_promise_base_time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="@string/promise_details_promise_repeat_interval"
                 android:textStyle="bold"/>
             <TextView
