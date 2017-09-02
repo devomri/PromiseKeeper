@@ -69,6 +69,7 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
                 intent.putExtra("nextDate", currPromise.getPromiseNextTime());
                 intent.putExtra("description", currPromise.getmDescription());
                 intent.putExtra("type", currPromise.getmPromiseType().ordinal());
+                intent.putExtra("status", currPromise.getmPromiseStatus().ordinal());
                 intent.putExtra("interval", currPromise.getmPromiseInterval().ordinal());
                 intent.putExtra("guardContact", currPromise.getmGuardContactNumber());
                 intent.putExtra("location", currPromise.getmLocation());
@@ -85,7 +86,11 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
         PromiseListItem currPromise = mDataSet.get(position);
 
         holder.mID.setText(String.valueOf(position));
-        holder.mTitle.setText(currPromise.getmTitle());
+        String promiseTitle = currPromise.getmTitle();
+//        if (promiseTitle.length() > 15) {
+//            promiseTitle = promiseTitle.substring(0, 15) + "...";
+//        }
+        holder.mTitle.setText(promiseTitle);
         holder.mDescription.setText(currPromise.getmDescription());
         holder.mNextDate.setText(currPromise.getPromiseNextTime());
 

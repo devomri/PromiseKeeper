@@ -25,7 +25,7 @@ public class PromiseEnumConvrsions {
         return promiseTypeText;
     }
 
-    public static String convertIntoToPromiseInterval(int promiseIntervalInt) {
+    public static String convertIntToPromiseInterval(int promiseIntervalInt) {
         String promiseIntervalString;
 
         switch (promiseIntervalInt) {
@@ -55,5 +55,29 @@ public class PromiseEnumConvrsions {
         }
 
         return promiseIntervalString;
+    }
+
+    public static String convertIntToPromiseStatus(int promiseStatusInt) {
+        String promiseStatusText;
+
+        switch (promiseStatusInt) {
+            case 0: {
+                promiseStatusText = "Active";
+                break;
+            }
+            case 1: {
+                promiseStatusText = "Fulfilled";
+                break;
+            }
+            case 2: {
+                promiseStatusText = "Unfulfilled";
+                break;
+            }
+            default:{
+                promiseStatusText = "";
+            }
+        }
+
+        return promiseStatusText;
     }
 }

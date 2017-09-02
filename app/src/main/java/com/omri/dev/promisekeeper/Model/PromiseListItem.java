@@ -14,10 +14,10 @@ import java.util.Date;
 public class PromiseListItem{
     // Data Members
     private PromiseTypes mPromiseType;
+    private PromiseStatus mPromiseStatus;
     private String mTitle;
     private String mDescription;
     private String mBaseTime;
-    private String mExecuteTime;
     private String mGuardContactNumber;
     private PromiseIntervals mPromiseInterval;
     private String mLocation;
@@ -41,7 +41,7 @@ public class PromiseListItem{
         mLocation = location;
         mCallContactNumber = callContactNumber;
 
-        mExecuteTime = "";
+        mPromiseStatus = PromiseStatus.ACTIVE;
     }
 
     // Properties
@@ -78,21 +78,9 @@ public class PromiseListItem{
         return mCallContactNumber;
     }
 
-    public void setmExecuteTime(String executeTime) {
-        mExecuteTime = executeTime;
-    }
-
     // Methods
     public String getPromiseNextTime(){
         Date baseTime = DateUtils.convertStringToDate(mBaseTime);
-        Date now = Calendar.getInstance().getTime();
-
-        // If base time has not passed yet - next time is base time
-        if (baseTime.after(now)) {
-            return mBaseTime;
-        }
-
-        Date executeTime = DateUtils.convertStringToDate(mExecuteTime);
 
         int daysToAdd;
         switch (mPromiseInterval) {
@@ -121,8 +109,16 @@ public class PromiseListItem{
             }
         }
 
-        Date nextTime = DateUtils.addDays(executeTime ,daysToAdd);
+        Date nextTime = DateUtils.addDays(baseTime ,daysToAdd);
 
         return DateUtils.convertDateToString(nextTime);
+    }
+
+    public PromiseStatus getmPromiseStatus() {
+        return mPromiseStatus;
+    }
+
+    public void setmPromiseStatus(PromiseStatus mPromiseStatus) {
+        this.mPromiseStatus = mPromiseStatus;
     }
 }

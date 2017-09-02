@@ -14,6 +14,7 @@ public class PromiseDetailsActivity extends Activity {
     private TextView promiseNextDateTextView;
     private TextView promiseDescriptionTextView;
     private TextView promiseTypeTextView;
+    private TextView promiseStatusTextView;
     private TextView promiseInterval;
     private TextView promiseBaseTime;
     private LinearLayout promiseGuardContactLayout;
@@ -32,6 +33,7 @@ public class PromiseDetailsActivity extends Activity {
         promiseNextDateTextView = (TextView) findViewById(R.id.promise_details_next_date);
         promiseDescriptionTextView = (TextView) findViewById(R.id.promise_details_description);
         promiseTypeTextView = (TextView)findViewById(R.id.promise_details_promise_type);
+        promiseStatusTextView = (TextView)findViewById(R.id.promise_details_promise_status);
         promiseInterval = (TextView)findViewById(R.id.promise_details_promise_interval);
         promiseBaseTime = (TextView)findViewById(R.id.promise_details_promise_base_time);
         promiseGuardContactLayout = (LinearLayout)findViewById(R.id.promise_details_guard_contact_layout);
@@ -50,8 +52,11 @@ public class PromiseDetailsActivity extends Activity {
         int promiseTypeInt = i.getIntExtra("type", 0);
         promiseTypeTextView.setText(PromiseEnumConvrsions.convertIntToPromiseType(promiseTypeInt));
 
+        int promiseStatusInt = i.getIntExtra("status", 0);
+        promiseStatusTextView.setText(PromiseEnumConvrsions.convertIntToPromiseStatus(promiseStatusInt));
+
         int promiseIntervalInt = i.getIntExtra("interval", 0);
-        promiseInterval.setText(PromiseEnumConvrsions.convertIntoToPromiseInterval(promiseIntervalInt));
+        promiseInterval.setText(PromiseEnumConvrsions.convertIntToPromiseInterval(promiseIntervalInt));
 
         String guardContactNumber = i.getStringExtra("guardContact");
         if (!guardContactNumber.equals("")) {
