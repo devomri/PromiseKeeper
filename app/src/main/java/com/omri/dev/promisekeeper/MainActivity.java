@@ -26,6 +26,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private static final int CREATE_PROMISE_REQUEST_CODE = 1;
+
     private RecyclerView mRecyclerView;
     private PromisesAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), CreatePromiseActivity.class);
-                startActivity(i);
+                startActivityForResult(i, CREATE_PROMISE_REQUEST_CODE);
             }
         });
 
@@ -176,6 +178,17 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == CREATE_PROMISE_REQUEST_CODE) {
+                PromiseListItem newPromise = new PromiseListItem(data);
+                mFuturePromises.add(newPromise);
+                mAdapter.notifyDataSetChanged();
+            }
+        }
     }
 
     private void loadFuturePromises() {

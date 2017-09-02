@@ -81,17 +81,6 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/promise_details_promise_next_time"
-                android:textStyle="bold"/>
-            <TextView
-                android:id="@+id/promise_details_next_date"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:text="@string/promise_details_description"
                 android:textStyle="bold"/>
             <TextView

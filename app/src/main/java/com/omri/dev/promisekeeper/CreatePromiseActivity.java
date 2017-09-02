@@ -26,6 +26,7 @@ import android.widget.TimePicker;
 import com.omri.dev.promisekeeper.Fragments.DatePickerFragment;
 import com.omri.dev.promisekeeper.Fragments.TimePickerFragment;
 import com.omri.dev.promisekeeper.Model.PromiseIntervals;
+import com.omri.dev.promisekeeper.Model.PromiseListItem;
 import com.omri.dev.promisekeeper.Model.PromiseTypes;
 
 import static android.media.CamcorderProfile.get;
@@ -192,11 +193,9 @@ public class CreatePromiseActivity extends AppCompatActivity {
         }
 
         String promiseIntervalString = mPromiseRepeatSpinner.getSelectedItem().toString();
-        PromiseIntervals promiseInterval;
+        PromiseIntervals promiseInterval = PromiseIntervals.NO_REPEAT;
         String[] intervalsStringArray = getResources().getStringArray(R.array.create_promise_repeat_array);
-        if (promiseIntervalString.equals(intervalsStringArray[0])) {
-            promiseInterval = PromiseIntervals.NO_REPEAT;
-        } else if (promiseIntervalString.equals(intervalsStringArray[1])) {
+        if (promiseIntervalString.equals(intervalsStringArray[1])) {
             promiseInterval = PromiseIntervals.DAILY;
         } else if (promiseIntervalString.equals(intervalsStringArray[2])) {
             promiseInterval = PromiseIntervals.WEEKLY;
@@ -255,6 +254,21 @@ public class CreatePromiseActivity extends AppCompatActivity {
 
         if (!isValid) {
             focusView.requestFocus();
+        } else {
+            // Create a new promise
+            PromiseListItem newPromiseItem =
+                    new PromiseListItem(promiseType,
+                                        promiseTitle,
+                                        promiseDescription,
+                                        promiseBaseTime,
+                                        promiseGuardContact,
+                                        promiseInterval,
+                                        promiseLocation,
+                                        promiseCallContact);
+
+            Intent resultIntent = newPromiseItem.toIntent();
+            setResult(RESULT_OK, resultIntent);
+            finish();
         }
     }
 }

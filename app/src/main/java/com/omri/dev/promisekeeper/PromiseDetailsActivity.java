@@ -8,10 +8,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.omri.dev.promisekeeper.Model.PromiseEnumConvrsions;
+import com.omri.dev.promisekeeper.Model.PromiseListItem;
+import com.omri.dev.promisekeeper.Model.PromiseTypes;
 
 public class PromiseDetailsActivity extends Activity {
     private TextView promiseTitleTextView;
-    private TextView promiseNextDateTextView;
     private TextView promiseDescriptionTextView;
     private TextView promiseTypeTextView;
     private TextView promiseStatusTextView;
@@ -30,7 +31,6 @@ public class PromiseDetailsActivity extends Activity {
         setContentView(R.layout.activity_promise_details);
 
         promiseTitleTextView = (TextView)findViewById(R.id.promise_details_title);
-        promiseNextDateTextView = (TextView) findViewById(R.id.promise_details_next_date);
         promiseDescriptionTextView = (TextView) findViewById(R.id.promise_details_description);
         promiseTypeTextView = (TextView)findViewById(R.id.promise_details_promise_type);
         promiseStatusTextView = (TextView)findViewById(R.id.promise_details_promise_status);
@@ -43,32 +43,29 @@ public class PromiseDetailsActivity extends Activity {
         promiseLocationLayout = (LinearLayout)findViewById(R.id.promise_details_location_layout);
         promiseLocationTextView = (TextView)findViewById(R.id.promise_details_location);
 
-        Intent i = getIntent();
-        promiseTitleTextView.setText(i.getStringExtra("title"));
-        promiseNextDateTextView.setText(i.getStringExtra("nextDate"));
-        promiseDescriptionTextView.setText(i.getStringExtra("description"));
-        promiseBaseTime.setText(i.getStringExtra("baseTime"));
+        PromiseListItem promise = new PromiseListItem(getIntent());
 
-        int promiseTypeInt = i.getIntExtra("type", 0);
-        promiseTypeTextView.setText(PromiseEnumConvrsions.convertIntToPromiseType(promiseTypeInt));
+        promiseTitleTextView.setText(promise.getmTitle());
+        promiseDescriptionTextView.setText(promise.getmDescription());
+        promiseBaseTime.setText(promise.getmBaseTime());
 
-        int promiseStatusInt = i.getIntExtra("status", 0);
-        promiseStatusTextView.setText(PromiseEnumConvrsions.convertIntToPromiseStatus(promiseStatusInt));
+        promiseTypeTextView.setText(PromiseEnumConvrsions.convertIntToPromiseTypeText(promise.getmPromiseType()));
 
-        int promiseIntervalInt = i.getIntExtra("interval", 0);
-        promiseInterval.setText(PromiseEnumConvrsions.convertIntToPromiseInterval(promiseIntervalInt));
+        promiseStatusTextView.setText(PromiseEnumConvrsions.convertIntToPromiseStatusString(promise.getmPromiseStatus()));
 
-        String guardContactNumber = i.getStringExtra("guardContact");
+        promiseInterval.setText(PromiseEnumConvrsions.convertIntToPromiseIntervalText(promise.getmPromiseInterval()));
+
+        String guardContactNumber = promise.getmGuardContactNumber();
         if (!guardContactNumber.equals("")) {
             promiseGuardContactTextView.setText(guardContactNumber);
             promiseGuardContactLayout.setVisibility(View.VISIBLE);
         }
 
-        if (promiseIntervalInt == 1) {
-            promiseLocationTextView.setText(i.getStringExtra("location"));
+        if (promise.getmPromiseType() == PromiseTypes.LOCATION) {
+            promiseLocationTextView.setText(promise.getmLocation());
             promiseLocationLayout.setVisibility(View.VISIBLE);
-        } else if (promiseTypeInt == 2) {
-            promiseCallContactTextView.setText(i.getStringExtra("callContact"));
+        } else if (promise.getmPromiseType() == PromiseTypes.CALL) {
+            promiseCallContactTextView.setText(promise.getmCallContactNumber());
             promiseCallContactLayout.setVisibility(View.VISIBLE);
         }
     }

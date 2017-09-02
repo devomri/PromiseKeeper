@@ -1,5 +1,8 @@
 package com.omri.dev.promisekeeper.Model;
 
+import android.content.Context;
+import android.content.Intent;
+
 import com.omri.dev.promisekeeper.Utils.DateUtils;
 
 import java.text.ParseException;
@@ -42,6 +45,25 @@ public class PromiseListItem{
         mCallContactNumber = callContactNumber;
 
         mPromiseStatus = PromiseStatus.ACTIVE;
+    }
+
+    public PromiseListItem(Intent i) {
+        mTitle = i.getStringExtra("title");
+        mDescription = i.getStringExtra("description");
+        mBaseTime = i.getStringExtra("baseTime");
+
+        int promiseTypeInt = i.getIntExtra("type", 0);
+        mPromiseType = PromiseEnumConvrsions.convertIntToPromiseType(promiseTypeInt);
+
+        int promiseStatusInt = i.getIntExtra("status", 0);
+        mPromiseStatus = PromiseEnumConvrsions.convertIntToPromiseStatus(promiseStatusInt);
+
+        int promiseIntervalInt = i.getIntExtra("interval", 0);
+        mPromiseInterval = PromiseEnumConvrsions.convertIntToPromiseInterval(promiseIntervalInt);
+
+        mGuardContactNumber = i.getStringExtra("guardContact");
+        mLocation = i.getStringExtra("location");
+        mCallContactNumber = i.getStringExtra("callContact");
     }
 
     // Properties
@@ -120,5 +142,31 @@ public class PromiseListItem{
 
     public void setmPromiseStatus(PromiseStatus mPromiseStatus) {
         this.mPromiseStatus = mPromiseStatus;
+    }
+
+    public Intent toIntent(Context context, Class<?> cls) {
+        Intent intent = new Intent(context, cls);
+        this.populateIntent(intent);
+
+        return intent;
+    }
+
+    public Intent toIntent() {
+        Intent intent = new Intent();
+        this.populateIntent(intent);
+
+        return intent;
+    }
+
+    private void populateIntent(Intent intent) {
+        intent.putExtra("title", this.getmTitle());
+        intent.putExtra("baseTime", this.getmBaseTime());
+        intent.putExtra("description", this.getmDescription());
+        intent.putExtra("type", this.getmPromiseType().ordinal());
+        intent.putExtra("status", this.getmPromiseStatus().ordinal());
+        intent.putExtra("interval", this.getmPromiseInterval().ordinal());
+        intent.putExtra("guardContact", this.getmGuardContactNumber());
+        intent.putExtra("location", this.getmLocation());
+        intent.putExtra("callContact", this.getmCallContactNumber());
     }
 }

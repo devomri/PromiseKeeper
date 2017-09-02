@@ -63,17 +63,7 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
                 int promiseID = Integer.parseInt(((TextView)v.findViewById(R.id.promise_list_item_id)).getText().toString());
                 PromiseListItem currPromise = mDataSet.get(promiseID);
 
-                Intent intent = new Intent(context, PromiseDetailsActivity.class);
-                intent.putExtra("title", currPromise.getmTitle());
-                intent.putExtra("baseTime", currPromise.getmBaseTime());
-                intent.putExtra("nextDate", currPromise.getPromiseNextTime());
-                intent.putExtra("description", currPromise.getmDescription());
-                intent.putExtra("type", currPromise.getmPromiseType().ordinal());
-                intent.putExtra("status", currPromise.getmPromiseStatus().ordinal());
-                intent.putExtra("interval", currPromise.getmPromiseInterval().ordinal());
-                intent.putExtra("guardContact", currPromise.getmGuardContactNumber());
-                intent.putExtra("location", currPromise.getmLocation());
-                intent.putExtra("callContact", currPromise.getmCallContactNumber());
+                Intent intent = currPromise.toIntent(context, PromiseDetailsActivity.class);
                 context.startActivity(intent);
             }
         });
