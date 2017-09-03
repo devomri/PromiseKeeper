@@ -20,6 +20,7 @@ import com.omri.dev.promisekeeper.Model.PromiseIntervals;
 import com.omri.dev.promisekeeper.Model.PromiseListItem;
 import com.omri.dev.promisekeeper.Model.PromiseStatus;
 import com.omri.dev.promisekeeper.Model.PromiseTypes;
+import com.omri.dev.promisekeeper.PromisesCheckManager.PromisesAlarmsShooter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,6 +72,9 @@ public class MainActivity extends AppCompatActivity
         fetchPromisesFromDB();
 
         loadFuturePromises();
+
+        // TODO: remove
+        PromisesAlarmsShooter pr = new PromisesAlarmsShooter(getApplicationContext());
     }
 
     private void fetchPromisesFromDB() {

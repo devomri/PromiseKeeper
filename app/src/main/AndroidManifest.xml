@@ -52,7 +52,13 @@
 
         <activity
             android:name=".GetLocationActivity"
-            android:label="@string/title_activity_get_location"></activity>
+            android:label="@string/title_activity_get_location" />
+        <activity android:name=".AboutActivity" />
+
+        <receiver
+            android:name=".PromisesCheckManager.PromisesAlarmsBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
     </application>
 
 </manifest>
