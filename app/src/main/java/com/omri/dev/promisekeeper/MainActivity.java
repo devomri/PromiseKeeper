@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity
     private List<PromiseListItem> mFulfilledPromises;
     private List<PromiseListItem> mUnfulfilledPromises;
 
+    private PromisesAlarmsShooter mPromisesAlarmsShooter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +65,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mPromisesAlarmsShooter = new PromisesAlarmsShooter(getApplicationContext());
 
         mRecyclerView = (RecyclerView)findViewById(R.id.promises_recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -148,6 +152,8 @@ public class MainActivity extends AppCompatActivity
                 PromiseListItem newPromise = new PromiseListItem(data);
                 mFuturePromises.add(newPromise);
                 mAdapter.notifyDataSetChanged();
+
+                mPromisesAlarmsShooter.createAnAlarmForPromise(newPromise);
             }
         }
     }

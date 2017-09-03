@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.omri.dev.promisekeeper.AboutActivity;
+import com.omri.dev.promisekeeper.Model.PromiseListItem;
 import com.omri.dev.promisekeeper.R;
 
 public class PromisesAlarmsBroadcastReceiver extends BroadcastReceiver {
@@ -20,10 +21,10 @@ public class PromisesAlarmsBroadcastReceiver extends BroadcastReceiver {
 
 
         Intent i = new Intent(context, AboutActivity.class);
+        PromiseListItem promise = new PromiseListItem(i);
         PendingIntent pi = PendingIntent.getActivity(context, 0, i, 0);
         Notification n = new Notification.Builder(context)
-                .setContentTitle("New promise arrived")
-                .setContentText("This is the text")
+                .setContentTitle("New promise arrived " + promise.getmTitle())
                 .setSmallIcon(R.drawable.ic_done_white)
                 .setContentIntent(pi)
                 .build();

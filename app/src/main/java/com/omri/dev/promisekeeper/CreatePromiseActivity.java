@@ -105,7 +105,7 @@ public class CreatePromiseActivity extends AppCompatActivity {
                 timeFragment.setOnTimeSetListener(new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        String time = dayOfMonth + "/" + month + "/" + year + " " + hourOfDay + ":" + minute;
+                        String time = dayOfMonth + "/" + (month + 1) + "/" + year + " " + hourOfDay + ":" + minute;
                         mPromiseBaseTime.setText(time);
                     }
                 });
