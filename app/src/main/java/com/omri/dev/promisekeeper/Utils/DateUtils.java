@@ -25,6 +25,14 @@ public class DateUtils {
         return date;
     }
 
+    public static Calendar convertStringToCalendar(String dateString) {
+        Date date = convertStringToDate(dateString);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
+        return calendar;
+    }
+
     public static String convertDateToString(Date date) {
         String dateString;
 

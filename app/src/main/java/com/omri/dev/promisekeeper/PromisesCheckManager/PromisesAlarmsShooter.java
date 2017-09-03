@@ -8,6 +8,8 @@ import android.os.SystemClock;
 import android.util.Log;
 
 import com.omri.dev.promisekeeper.AboutActivity;
+import com.omri.dev.promisekeeper.Model.PromiseListItem;
+import com.omri.dev.promisekeeper.Utils.DateUtils;
 
 import java.util.Calendar;
 
@@ -22,12 +24,15 @@ public class PromisesAlarmsShooter {
     public PromisesAlarmsShooter(Context context) {
         mContext = context;
         mAlarmManager = (AlarmManager)mContext.getSystemService(Context.ALARM_SERVICE);
+    }
 
-        // TODO: remove
+    public void createAnAlarmForPromise(PromiseListItem promise) {
+        Calendar promiseTime = DateUtils.convertStringToCalendar(promise.getmBaseTime());
+
         Intent i = new Intent(mContext, PromisesAlarmsBroadcastReceiver.class);
         PendingIntent pi = PendingIntent.getBroadcast(mContext, 0, i, 0);
         mAlarmManager.set(AlarmManager.RTC_WAKEUP,
-                Calendar.getInstance().getTimeInMillis() + 2000,
+                promiseTime.getTimeInMillis(),
                 pi);
     }
 }

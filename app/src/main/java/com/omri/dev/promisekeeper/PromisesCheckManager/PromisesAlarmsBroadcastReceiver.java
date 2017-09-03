@@ -18,6 +18,7 @@ public class PromisesAlarmsBroadcastReceiver extends BroadcastReceiver {
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
+
         Intent i = new Intent(context, AboutActivity.class);
         PendingIntent pi = PendingIntent.getActivity(context, 0, i, 0);
         Notification n = new Notification.Builder(context)
