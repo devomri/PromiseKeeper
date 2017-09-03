@@ -16,18 +16,20 @@ public class PromisesAlarmsBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        PromiseListItem promise = new PromiseListItem(intent);
+
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-
-        Intent i = new Intent(context, AboutActivity.class);
-        PromiseListItem promise = new PromiseListItem(i);
-        PendingIntent pi = PendingIntent.getActivity(context, 0, i, 0);
+        Intent notificationIntent = new Intent(context, AboutActivity.class);
+        PendingIntent pi = PendingIntent.getActivity(context, 0, notificationIntent, 0);
         Notification n = new Notification.Builder(context)
                 .setContentTitle("New promise arrived " + promise.getmTitle())
                 .setSmallIcon(R.drawable.ic_done_white)
                 .setContentIntent(pi)
                 .build();
+
+        // TODO: Check if promise is kept
 
         notificationManager.notify(1, n);
     }

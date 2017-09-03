@@ -71,4 +71,8 @@ public class PromisesDAL {
 
         return unfulfilledPromises;
     }
+
+    public void markPromiseAsUnfulfilled(PromiseListItem promise) {
+        // TODO: implement
+    }
 }
