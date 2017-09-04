@@ -67,7 +67,7 @@ public class GetLocationActivity extends FragmentActivity implements OnMapReadyC
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 
                 Intent i = new Intent();
-                String locationString = "(" + latLng.latitude + "," + latLng.longitude + ")";
+                String locationString = latLng.latitude + "," + latLng.longitude;
                 i.setData(Uri.parse(locationString));
                 setResult(RESULT_OK, i);
                 finish();

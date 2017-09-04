@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.omri.dev.promisekeeper.AboutActivity;
 import com.omri.dev.promisekeeper.Model.PromiseListItem;
+import com.omri.dev.promisekeeper.Model.PromiseVerifier;
 import com.omri.dev.promisekeeper.R;
 
 public class PromisesAlarmsBroadcastReceiver extends BroadcastReceiver {
@@ -17,6 +18,8 @@ public class PromisesAlarmsBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         PromiseListItem promise = new PromiseListItem(intent);
+        PromiseVerifier verifier = new PromiseVerifier(context);
+        verifier.verifyPromise(promise);
 
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -24,8 +27,10 @@ public class PromisesAlarmsBroadcastReceiver extends BroadcastReceiver {
         Intent notificationIntent = new Intent(context, AboutActivity.class);
         PendingIntent pi = PendingIntent.getActivity(context, 0, notificationIntent, 0);
         Notification n = new Notification.Builder(context)
-                .setContentTitle("New promise arrived " + promise.getmTitle())
+                .setContentTitle("New promise arrived: " + promise.getmTitle())
+                .setContentText(promise.getmDescription())
                 .setSmallIcon(R.drawable.ic_done_white)
+                .setAutoCancel(true)
                 .setContentIntent(pi)
                 .build();
 
