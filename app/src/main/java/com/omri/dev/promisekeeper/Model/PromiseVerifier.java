@@ -55,6 +55,9 @@ public class PromiseVerifier {
 
                 break;
             }
+            case CALL: {
+                break;
+            }
         }
 
         return isPromiseKept[0];

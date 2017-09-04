@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.omri.dev.promisekeeper.AboutActivity">
     <TextView
+        android:id="@+id/about_text_view"
         android:layout_width="368dp"
         android:layout_height="495dp"
         android:text="About"
