@@ -46,10 +46,11 @@ public class PromiseListItem{
         mCallContactNumber = callContactNumber;
 
         mPromiseStatus = PromiseStatus.ACTIVE;
-        mPromiseID = ""; //TODO: generate GUID
+        mPromiseID = java.util.UUID.randomUUID().toString();
     }
 
     public PromiseListItem(Intent i) {
+        mPromiseID = i.getStringExtra("id");
         mTitle = i.getStringExtra("title");
         mDescription = i.getStringExtra("description");
         mBaseTime = i.getStringExtra("baseTime");
@@ -161,6 +162,7 @@ public class PromiseListItem{
     }
 
     private void populateIntent(Intent intent) {
+        intent.putExtra("id", this.getmPromiseID());
         intent.putExtra("title", this.getmTitle());
         intent.putExtra("baseTime", this.getmBaseTime());
         intent.putExtra("description", this.getmDescription());
