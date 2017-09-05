@@ -70,7 +70,8 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".PermissionRequestActivity"></activity>
+        <activity android:name=".PermissionRequestActivity" />
+        <activity android:name=".AskGeneralPromiseFulfillment"></activity>
     </application>
 
 </manifest>

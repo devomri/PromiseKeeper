@@ -15,20 +15,20 @@ import java.util.List;
 public class PromisesDAL {
     public ArrayList<PromiseListItem> getFuturePromises() {
         ArrayList<PromiseListItem> futurePromises = new ArrayList<>();
-//        futurePromises.add(new PromiseListItem(PromiseTypes.GENERAL,
-//                "General future promise 1",
-//                "description for genral future promise. Adding a lot of text in order to check the overflow",
-//                "03/09/2017 16:20",
-//                "06666666",
-//                PromiseIntervals.NO_REPEAT,
-//                "", ""));
-        futurePromises.add(new PromiseListItem(PromiseTypes.LOCATION,
-                "General future promise 2",
-                "description for genral future promise",
-                "02/08/2017 07:15",
-                "",
-                PromiseIntervals.DAILY,
-                "(456,456)", ""));
+        futurePromises.add(new PromiseListItem(PromiseTypes.GENERAL,
+                "General future promise 1",
+                "description for genral future promise. Adding a lot of text in order to check the overflow",
+                "03/09/2017 16:20",
+                "06666666",
+                PromiseIntervals.NO_REPEAT,
+                "", ""));
+//        futurePromises.add(new PromiseListItem(PromiseTypes.LOCATION,
+//                "General future promise 2",
+//                "description for genral future promise",
+//                "02/08/2017 07:15",
+//                "",
+//                PromiseIntervals.DAILY,
+//                "(456,456)", ""));
 //        futurePromises.add(new PromiseListItem(PromiseTypes.CALL,
 //                "General future promise 3",
 //                "description for genral future promise",
@@ -72,7 +72,15 @@ public class PromisesDAL {
         return unfulfilledPromises;
     }
 
-    public void markPromiseAsUnfulfilled(PromiseListItem promise) {
+    public void markPromiseAsUnfulfilled(String promiseID) {
+        // TODO: implement
+    }
+
+    public void markPromisefulfilled(String promiseID) {
+        // TODO: implement
+    }
+
+    public void createNextPromiseIfNecessary(String promiseID) {
         // TODO: implement
     }
 }

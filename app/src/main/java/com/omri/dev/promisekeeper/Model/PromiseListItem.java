@@ -16,6 +16,7 @@ import java.util.Date;
 
 public class PromiseListItem{
     // Data Members
+    private String mPromiseID;
     private PromiseTypes mPromiseType;
     private PromiseStatus mPromiseStatus;
     private String mTitle;
@@ -45,6 +46,7 @@ public class PromiseListItem{
         mCallContactNumber = callContactNumber;
 
         mPromiseStatus = PromiseStatus.ACTIVE;
+        mPromiseID = ""; //TODO: generate GUID
     }
 
     public PromiseListItem(Intent i) {
@@ -168,5 +170,9 @@ public class PromiseListItem{
         intent.putExtra("guardContact", this.getmGuardContactNumber());
         intent.putExtra("location", this.getmLocation());
         intent.putExtra("callContact", this.getmCallContactNumber());
+    }
+
+    public String getmPromiseID() {
+        return mPromiseID;
     }
 }

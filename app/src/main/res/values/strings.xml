@@ -51,4 +51,7 @@
     <string name="promise_details_promise_location">Promise location:</string>
     <string name="promise_details_promise_base_time">Promise base time:</string>
     <string name="promise_details_promise_status">Promise status:</string>
+    <string name="ask_general_promise_prefece">Did you keep the following promise:</string>
+    <string name="ask_general_promise_promise_is_kept">Promise is kept</string>
+    <string name="ask_general_promise_promise_wasn_t_kept">Promise wasn\'t kept</string>
 </resources>

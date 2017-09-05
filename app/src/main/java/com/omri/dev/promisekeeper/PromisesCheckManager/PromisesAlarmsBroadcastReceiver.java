@@ -9,33 +9,67 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.omri.dev.promisekeeper.AboutActivity;
+import com.omri.dev.promisekeeper.AskGeneralPromiseFulfillment;
+import com.omri.dev.promisekeeper.DAL.PromisesDAL;
 import com.omri.dev.promisekeeper.Model.PromiseListItem;
+import com.omri.dev.promisekeeper.Model.PromiseStatus;
+import com.omri.dev.promisekeeper.Model.PromiseTypes;
 import com.omri.dev.promisekeeper.Model.PromiseVerifier;
+import com.omri.dev.promisekeeper.PromiseDetailsActivity;
 import com.omri.dev.promisekeeper.R;
 
 public class PromisesAlarmsBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        PromiseListItem promise = new PromiseListItem(intent);
-        PromiseVerifier verifier = new PromiseVerifier(context);
-        verifier.verifyPromise(promise);
+        PromisesDAL dal = new PromisesDAL();
 
+        PromiseListItem promise = new PromiseListItem(intent);
         NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
-        Intent notificationIntent = new Intent(context, AboutActivity.class);
-        PendingIntent pi = PendingIntent.getActivity(context, 0, notificationIntent, 0);
-        Notification n = new Notification.Builder(context)
-                .setContentTitle("New promise arrived: " + promise.getmTitle())
-                .setContentText(promise.getmDescription())
-                .setSmallIcon(R.drawable.ic_done_white)
-                .setAutoCancel(true)
-                .setContentIntent(pi)
-                .build();
+        // Cannot verify
+        if (promise.getmPromiseType() == PromiseTypes.GENERAL) {
+            // Ask the user for verification
+            Intent askGeneralPromise = promise.toIntent(context, AskGeneralPromiseFulfillment.class);
+            PendingIntent pi = PendingIntent.getActivity(context, 0, askGeneralPromise, PendingIntent.FLAG_ONE_SHOT);
+            Notification n = new Notification.Builder(context)
+                    .setContentTitle("Did you keep '" + promise.getmTitle() + "'?")
+                    .setContentText(promise.getmDescription())
+                    .setSmallIcon(R.drawable.ic_done_white) // TODO: change to the application icon
+                    .setAutoCancel(true)
+                    .setContentIntent(pi)
+                    .build();
 
-        // TODO: Check if promise is kept
+            notificationManager.notify(1, n);
 
-        notificationManager.notify(1, n);
+        } else {
+            PromiseVerifier verifier = new PromiseVerifier(context);
+            Boolean isKept = verifier.verifyPromise(promise);
+            String message = "Promise '" + promise.getmTitle() + "' ";
+            if (isKept) {
+                message += "is kept!";
+                promise.setmPromiseStatus(PromiseStatus.FULFILLED);
+                dal.markPromisefulfilled(promise.getmPromiseID());
+            } else {
+                message += "was not kept";
+                promise.setmPromiseStatus(PromiseStatus.UNFULFILLED);
+                dal.markPromiseAsUnfulfilled(promise.getmPromiseID());
+            }
+
+            dal.createNextPromiseIfNecessary(promise.getmPromiseID());
+
+            Intent notificationIntent = promise.toIntent(context, PromiseDetailsActivity.class);
+            PendingIntent pi = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
+            Notification n = new Notification.Builder(context)
+                    .setContentTitle(message)
+                    .setContentText(promise.getmDescription())
+                    .setSmallIcon(R.drawable.ic_done_white) // TODO: change to the application icon
+                    .setAutoCancel(true)
+                    .setContentIntent(pi)
+                    .build();
+
+            notificationManager.notify(1, n);
+        }
     }
 }

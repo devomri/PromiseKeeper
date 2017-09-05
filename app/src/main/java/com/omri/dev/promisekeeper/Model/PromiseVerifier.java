@@ -1,6 +1,7 @@
 package com.omri.dev.promisekeeper.Model;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.location.Location;
 import android.provider.CallLog;
@@ -9,6 +10,7 @@ import android.provider.CallLog;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.omri.dev.promisekeeper.AskGeneralPromiseFulfillment;
 import com.omri.dev.promisekeeper.Utils.DateUtils;
 import com.omri.dev.promisekeeper.Utils.LocationUtils;
 
@@ -35,11 +37,6 @@ public class PromiseVerifier {
         final boolean[] isPromiseKept = {true};
 
         switch (promise.getmPromiseType()) {
-            case GENERAL: {
-                // Ask the user whether the promise is kept
-
-                break;
-            }
             case LOCATION: {
                 mFusedLocationClient.getLastLocation()
                         .addOnSuccessListener(new OnSuccessListener<Location>() {

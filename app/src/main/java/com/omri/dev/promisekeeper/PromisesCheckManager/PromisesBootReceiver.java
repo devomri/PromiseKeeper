@@ -36,7 +36,7 @@ public class PromisesBootReceiver extends BroadcastReceiver {
             for (PromiseListItem promise : futurePromises) {
                 Date promiseDate = DateUtils.convertStringToDate(promise.getmBaseTime());
                 if (promiseDate.before(now)) {
-                    promisesDAL.markPromiseAsUnfulfilled(promise);
+                    promisesDAL.markPromiseAsUnfulfilled(promise.getmPromiseID());
                 } else {
                     shooter.createAnAlarmForPromise(promise);
                 }
