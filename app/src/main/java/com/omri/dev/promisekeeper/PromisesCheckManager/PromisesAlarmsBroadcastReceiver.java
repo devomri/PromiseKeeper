@@ -57,7 +57,7 @@ public class PromisesAlarmsBroadcastReceiver extends BroadcastReceiver {
                 dal.markPromiseAsUnfulfilled(promise.getmPromiseID());
             }
 
-            dal.createNextPromiseIfNecessary(promise.getmPromiseID());
+            dal.createNextPromiseIfNecessary(promise);
 
             Intent notificationIntent = promise.toIntent(context, PromiseDetailsActivity.class);
             PendingIntent pi = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);

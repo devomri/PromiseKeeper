@@ -110,8 +110,21 @@ public class PromisesDAL{
         db.execSQL(sql);
     }
 
-    public void createNextPromiseIfNecessary(String promiseID) {
-        // TODO: implement
+    public void createNextPromiseIfNecessary(PromiseListItem originalPromise) {
+        // If there is a need for further promise
+        if (originalPromise.getmPromiseInterval() != PromiseIntervals.NO_REPEAT) {
+            PromiseListItem newPromise =
+                    new PromiseListItem(originalPromise.getmPromiseType(),
+                            originalPromise.getmTitle(),
+                            originalPromise.getmDescription(),
+                            originalPromise.getPromiseNextTime(), // Next time of previous promise is base time of the new one
+                            originalPromise.getmGuardContactNumber(),
+                            originalPromise.getmPromiseInterval(),
+                            originalPromise.getmLocation(),
+                            originalPromise.getmCallContactNumber());
+
+            this.createNewPromise(newPromise);
+        }
     }
 
     public void createNewPromise(PromiseListItem newPromise) {

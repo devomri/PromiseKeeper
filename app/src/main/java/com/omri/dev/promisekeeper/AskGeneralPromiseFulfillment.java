@@ -32,12 +32,22 @@ public class AskGeneralPromiseFulfillment extends AppCompatActivity {
     }
 
     public void promiseKept(View view) {
-        mPromisesDAL.markPromisefulfilled(mPromise.getmPromiseID());
-        finish();
+        changePromiseStatus(PromiseStatus.FULFILLED);
     }
 
     public void promiseIsNotKept(View view) {
-        mPromisesDAL.markPromiseAsUnfulfilled(mPromise.getmPromiseID());
+        changePromiseStatus(PromiseStatus.UNFULFILLED);
+    }
+
+    private void changePromiseStatus(PromiseStatus status) {
+        if (status == PromiseStatus.FULFILLED) {
+            mPromisesDAL.markPromisefulfilled(mPromise.getmPromiseID());
+        } else if (status == PromiseStatus.UNFULFILLED) {
+            mPromisesDAL.markPromiseAsUnfulfilled(mPromise.getmPromiseID());
+        }
+
+        mPromisesDAL.createNextPromiseIfNecessary(mPromise);
+
         finish();
     }
 }
