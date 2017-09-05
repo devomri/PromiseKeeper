@@ -9,6 +9,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.method.DateKeyListener;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -213,16 +214,19 @@ public class MainActivity extends AppCompatActivity
 
     private void loadFuturePromises() {
         setTitle(R.string.future_promises);
+        mFuturePromises = mPromisesDAL.getFuturePromises();
         mAdapter.updatePromisesDataSet(mFuturePromises);
     }
 
     private void loadFulfilledPromises() {
         setTitle(R.string.fulfilled_promises);
+        mFulfilledPromises = mPromisesDAL.getFulfilledPromises();
         mAdapter.updatePromisesDataSet(mFulfilledPromises);
     }
 
     private void loadUnfulfilledPromises() {
         setTitle(R.string.unfulfilled_promises);
+        mUnfulfilledPromises = mPromisesDAL.getUnfulfilledPromises();
         mAdapter.updatePromisesDataSet(mUnfulfilledPromises);
     }
 }
