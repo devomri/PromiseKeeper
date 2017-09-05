@@ -25,7 +25,7 @@ public class AskGeneralPromiseFulfillment extends AppCompatActivity {
         mPromiseDescrtiptionTextView = (TextView) findViewById(R.id.ask_general_promise_description);
 
         mPromise = new PromiseListItem(getIntent());
-        mPromisesDAL = new PromisesDAL();
+        mPromisesDAL = new PromisesDAL(getApplicationContext());
 
         mPromiseTitleTextView.setText(mPromise.getmTitle());
         mPromiseDescrtiptionTextView.setText(mPromise.getmDescription());

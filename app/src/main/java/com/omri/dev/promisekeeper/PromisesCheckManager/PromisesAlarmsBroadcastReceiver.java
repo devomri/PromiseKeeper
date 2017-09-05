@@ -22,7 +22,7 @@ public class PromisesAlarmsBroadcastReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        PromisesDAL dal = new PromisesDAL();
+        PromisesDAL dal = new PromisesDAL(context);
 
         PromiseListItem promise = new PromiseListItem(intent);
         NotificationManager notificationManager =

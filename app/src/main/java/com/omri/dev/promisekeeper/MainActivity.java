@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity
         mAdapter = new PromisesAdapter();
         mRecyclerView.setAdapter(mAdapter);
 
-        mPromisesDAL = new PromisesDAL();
+        mPromisesDAL = new PromisesDAL(getApplicationContext());
 
         fetchPromisesFromDB();
 
@@ -175,6 +175,8 @@ public class MainActivity extends AppCompatActivity
                     PromiseListItem newPromise = new PromiseListItem(data);
                     mFuturePromises.add(newPromise);
                     mAdapter.notifyDataSetChanged();
+
+                    mPromisesDAL.createNewPromise(newPromise);
 
                     mPromisesAlarmsShooter.createAnAlarmForPromise(newPromise);
                 }

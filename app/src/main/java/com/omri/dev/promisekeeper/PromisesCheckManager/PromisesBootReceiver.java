@@ -27,7 +27,7 @@ public class PromisesBootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
-            PromisesDAL promisesDAL = new PromisesDAL();
+            PromisesDAL promisesDAL = new PromisesDAL(context);
             PromisesAlarmsShooter shooter = new PromisesAlarmsShooter(context);
 
             ArrayList<PromiseListItem> futurePromises = promisesDAL.getFuturePromises();

@@ -45,8 +45,24 @@ public class PromiseListItem{
         mLocation = location;
         mCallContactNumber = callContactNumber;
 
-        mPromiseStatus = PromiseStatus.ACTIVE;
         mPromiseID = java.util.UUID.randomUUID().toString();
+        mPromiseStatus = PromiseStatus.ACTIVE;
+    }
+
+    public PromiseListItem(PromiseTypes type,
+                           String title,
+                           String description,
+                           String baseTime,
+                           String guardContactNumber,
+                           PromiseIntervals promiseInterval,
+                           String location,
+                           String callContactNumber,
+                           String id,
+                           PromiseStatus status) {
+        this(type, title, description, baseTime, guardContactNumber, promiseInterval, location, callContactNumber);
+
+        mPromiseID = id;
+        mPromiseStatus = status;
     }
 
     public PromiseListItem(Intent i) {
