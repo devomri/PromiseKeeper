@@ -12,6 +12,7 @@ import java.util.Date;
 public class AboutActivity extends AppCompatActivity {
 
     @Override
+    @SuppressWarnings({"MissingPermission"})
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
@@ -20,19 +21,19 @@ public class AboutActivity extends AppCompatActivity {
         TextView aboutTextView = (TextView) findViewById(R.id.about_text_view);
 
         StringBuffer sb = new StringBuffer();
-        Cursor managedCursor = managedQuery(CallLog.Calls.CONTENT_URI, null,
-                null, null, null);
-        int number = managedCursor.getColumnIndex(CallLog.Calls.NUMBER);
-        int type = managedCursor.getColumnIndex(CallLog.Calls.TYPE);
-        int date = managedCursor.getColumnIndex(CallLog.Calls.DATE);
-        int duration = managedCursor.getColumnIndex(CallLog.Calls.DURATION);
+        Cursor cursor = getContentResolver().query(CallLog.Calls.CONTENT_URI,
+                null, null, null, CallLog.Calls.DATE + " DESC");
+        int number = cursor.getColumnIndex(CallLog.Calls.NUMBER);
+        int type = cursor.getColumnIndex(CallLog.Calls.TYPE);
+        int date = cursor.getColumnIndex(CallLog.Calls.DATE);
+        int duration = cursor.getColumnIndex(CallLog.Calls.DURATION);
         sb.append("Call Details :");
-        while (managedCursor.moveToNext()) {
-            String phNumber = managedCursor.getString(number);
-            String callType = managedCursor.getString(type);
-            String callDate = managedCursor.getString(date);
+        while (cursor.moveToNext()) {
+            String phNumber = cursor.getString(number);
+            String callType = cursor.getString(type);
+            String callDate = cursor.getString(date);
             Date callDayTime = new Date(Long.valueOf(callDate));
-            String callDuration = managedCursor.getString(duration);
+            String callDuration = cursor.getString(duration);
             String dir = null;
             int dircode = Integer.parseInt(callType);
             switch (dircode) {
@@ -53,7 +54,7 @@ public class AboutActivity extends AppCompatActivity {
                     + " \nCall duration in sec :--- " + callDuration);
             sb.append("\n----------------------------------");
         }
-        managedCursor.close();
+        cursor.close();
         aboutTextView.setText(sb.toString());
     }
 }

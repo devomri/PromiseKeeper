@@ -49,4 +49,10 @@ public class DateUtils {
         cal.add(Calendar.DATE, days);
         return cal.getTime();
     }
+
+    public static Date getYesterday() {
+        final Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1);
+        return cal.getTime();
+    }
 }
