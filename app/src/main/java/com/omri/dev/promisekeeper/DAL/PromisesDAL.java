@@ -13,6 +13,7 @@ import com.omri.dev.promisekeeper.Model.PromiseStatus;
 import com.omri.dev.promisekeeper.Model.PromiseTypes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -88,6 +89,9 @@ public class PromisesDAL{
                                             status));
         }
         cursor.close();
+
+        // We want to watch the last promise first
+        Collections.reverse(promises);
 
         return promises;
     }
