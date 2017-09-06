@@ -192,10 +192,11 @@ public class MainActivity extends AppCompatActivity
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST: {
-                if (grantResults.length == 3){
+                if (grantResults.length == 4){
                     if (grantResults[0] == PackageManager.PERMISSION_DENIED ||
                         grantResults[1] == PackageManager.PERMISSION_DENIED ||
-                        grantResults[2] == PackageManager.PERMISSION_DENIED){
+                        grantResults[2] == PackageManager.PERMISSION_DENIED ||
+                        grantResults[3] == PackageManager.PERMISSION_DENIED){
                         // Re-ask the user
                         checkForPermissions();
                     }
