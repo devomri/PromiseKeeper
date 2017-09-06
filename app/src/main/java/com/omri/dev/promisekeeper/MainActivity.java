@@ -81,6 +81,13 @@ public class MainActivity extends AppCompatActivity
         loadFuturePromises();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        refetchPromises();
+    }
+
     private void checkForPermissions() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_DENIED ||
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED ||
@@ -176,6 +183,19 @@ public class MainActivity extends AppCompatActivity
                     }
                 }
             }
+        }
+    }
+
+    private void refetchPromises() {
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        // If future promises is checked
+        if (navigationView.getMenu().findItem(R.id.nav_future_promises).isChecked()) {
+            loadFuturePromises();
+        } else if (navigationView.getMenu().findItem(R.id.nav_fulfilled_promises).isChecked()) {
+            loadFulfilledPromises();
+        } else if (navigationView.getMenu().findItem(R.id.nav_future_promises).isChecked()) {
+            loadUnfulfilledPromises();
         }
     }
 
