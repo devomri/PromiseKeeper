@@ -56,4 +56,15 @@
     <string name="ask_general_promise_promise_wasn_t_kept">Promise wasn\'t kept</string>
     <string name="permisson_request_message">There is a need for the following permissions:  1. Location - in order to validate location based promises. 2. Read call log - in order to validate a call based promises. 3.Send SMS - for promise guard capability</string>
     <string name="delete_promise">Delete promise</string>
+    <string name="about_welcome_title">Welcome to promise keeper, the application that will help you keep your word!</string>
+    <string name="about_promise_details">When creating a new promise, one shall provide the following details:</string>
+    <string name="about_details_item_1">1. Title and short description</string>
+    <string name="about_details_item_2">2. Base date - The date which the promise will be validated</string>
+    <string name="about_details_item_3">3. Guard contact (optional) - A contact which will help you to keep your promise. he will be notified via SMS each time you fail to keep this promise</string>
+    <string name="about_details_item_4">4. Repeat interval</string>
+    <string name="about_details_item_5">5. Promise type - there are 3 types of promises:</string>
+    <string name="about_details_item_6">* General promise - The user make a general promise (e.g \'If I forget you, Jerusalem, may my right hand forget its skill\'). The validation of the promise fulfillment will be provided by the user.</string>
+    <string name="about_details_item_7">* Location promise - The user issue a location based promise (e.g \'Go to the gym each thursday\'). The user need to provide the location (e.g gym\'s location). and the applciation will validate the promise\'s fulfillment via GPS.</string>
+    <string name="about_details_item_8">* Call based promise - The user issue a call based promise (e.g \'Call my grandparents once a month\'). Then, user provides the promise call number (e.g grandparents\' number). Then the application will validate the promise fulfillmet via call log history</string>
+    <string name="ok">OK</string>
 </resources>
