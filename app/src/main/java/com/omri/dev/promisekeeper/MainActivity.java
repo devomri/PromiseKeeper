@@ -84,7 +84,8 @@ public class MainActivity extends AppCompatActivity
     private void checkForPermissions() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_DENIED ||
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED ||
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_DENIED) {
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_DENIED ||
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_DENIED) {
             // Inform the user
             Intent i = new Intent(this, PermissionRequestActivity.class);
             startActivityForResult(i, PERMISSION_REQUEST_ACTIVITY_RESULT);
@@ -175,7 +176,8 @@ public class MainActivity extends AppCompatActivity
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.READ_CALL_LOG,
                                      Manifest.permission.ACCESS_FINE_LOCATION,
-                                    Manifest.permission.ACCESS_COARSE_LOCATION},
+                                     Manifest.permission.ACCESS_COARSE_LOCATION,
+                                     Manifest.permission.SEND_SMS},
                         MY_PERMISSIONS_REQUEST);
 
                 break;

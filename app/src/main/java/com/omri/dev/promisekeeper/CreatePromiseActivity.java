@@ -12,6 +12,7 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.SmsManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -184,6 +185,10 @@ public class CreatePromiseActivity extends AppCompatActivity {
         String promiseLocation = mPromiseLocationText.getText().toString();
         String promiseCallContact = mPromiseContactCallText.getText().toString();
 
+        if (promiseGuardContact.equals(getString(R.string.create_promise_contact_guard_number_hint2))) {
+            promiseGuardContact = "";
+        }
+
         int selectedPromiseTypeId = mPromiseTypeGroup.getCheckedRadioButtonId();
         PromiseTypes promiseType = PromiseTypes.GENERAL;
         if (selectedPromiseTypeId == R.id.create_promise_rb_location) {
@@ -265,6 +270,9 @@ public class CreatePromiseActivity extends AppCompatActivity {
                                         promiseInterval,
                                         promiseLocation,
                                         promiseCallContact);
+
+            // If there is a guard - notify him
+            newPromiseItem.sendMessageToGuard("Hi, you were just nominated as a guard for my new promise");
 
             Intent resultIntent = newPromiseItem.toIntent();
             setResult(RESULT_OK, resultIntent);

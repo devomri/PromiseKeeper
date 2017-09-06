@@ -2,6 +2,7 @@ package com.omri.dev.promisekeeper.Model;
 
 import android.content.Context;
 import android.content.Intent;
+import android.telephony.SmsManager;
 
 import com.omri.dev.promisekeeper.Utils.DateUtils;
 
@@ -119,6 +120,18 @@ public class PromiseListItem{
         return mCallContactNumber;
     }
 
+    public PromiseStatus getmPromiseStatus() {
+        return mPromiseStatus;
+    }
+
+    public String getmPromiseID() {
+        return mPromiseID;
+    }
+
+    public void setmPromiseStatus(PromiseStatus mPromiseStatus) {
+        this.mPromiseStatus = mPromiseStatus;
+    }
+
     // Methods
     public String getPromiseNextTime(){
         Date baseTime = DateUtils.convertStringToDate(mBaseTime);
@@ -155,14 +168,6 @@ public class PromiseListItem{
         return DateUtils.convertDateToString(nextTime);
     }
 
-    public PromiseStatus getmPromiseStatus() {
-        return mPromiseStatus;
-    }
-
-    public void setmPromiseStatus(PromiseStatus mPromiseStatus) {
-        this.mPromiseStatus = mPromiseStatus;
-    }
-
     public Intent toIntent(Context context, Class<?> cls) {
         Intent intent = new Intent(context, cls);
         this.populateIntent(intent);
@@ -190,7 +195,29 @@ public class PromiseListItem{
         intent.putExtra("callContact", this.getmCallContactNumber());
     }
 
-    public String getmPromiseID() {
-        return mPromiseID;
+    public String toDetaildedText() {
+        String promiseString =
+                String.format("Promise details: %s, %s, At %s, Interval: %s",
+                        mTitle,
+                        mDescription,
+                        mBaseTime,
+                        PromiseEnumConvrsions.convertIntToPromiseIntervalText(mPromiseInterval));
+
+        return promiseString;
+    }
+
+    public void sendMessageToGuard(String message) {
+        if (mGuardContactNumber.length() > 0) {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(mGuardContactNumber,
+                    null,
+                    message + " " + toDetaildedText(),
+                    null,
+                    null);
+        }
+    }
+
+    public void sendUnfulfilledPromiseToGuard() {
+        sendMessageToGuard("Promise was not kept!");
     }
 }

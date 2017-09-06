@@ -44,6 +44,8 @@ public class AskGeneralPromiseFulfillment extends AppCompatActivity {
             mPromisesDAL.markPromisefulfilled(mPromise.getmPromiseID());
         } else if (status == PromiseStatus.UNFULFILLED) {
             mPromisesDAL.markPromiseAsUnfulfilled(mPromise.getmPromiseID());
+
+            mPromise.sendUnfulfilledPromiseToGuard();
         }
 
         mPromisesDAL.createNextPromiseIfNecessary(mPromise);

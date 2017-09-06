@@ -54,4 +54,5 @@
     <string name="ask_general_promise_prefece">Did you keep the following promise:</string>
     <string name="ask_general_promise_promise_is_kept">Promise is kept</string>
     <string name="ask_general_promise_promise_wasn_t_kept">Promise wasn\'t kept</string>
+    <string name="permisson_request_message">There is a need for the following permissions:  1. Location - in order to validate location based promises. 2. Read call log - in order to validate a call based promises. 3.Send SMS - for promise guard capability</string>
 </resources>

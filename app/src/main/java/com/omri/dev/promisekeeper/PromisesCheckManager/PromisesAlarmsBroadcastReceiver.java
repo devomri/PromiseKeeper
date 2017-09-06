@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.telephony.SmsManager;
 import android.util.Log;
 
 import com.omri.dev.promisekeeper.AboutActivity;
@@ -57,6 +58,9 @@ public class PromisesAlarmsBroadcastReceiver extends BroadcastReceiver {
                         message += "was not kept";
                         promise.setmPromiseStatus(PromiseStatus.UNFULFILLED);
                         dal.markPromiseAsUnfulfilled(promise.getmPromiseID());
+
+                        // If there is a guard, notify him
+                        promise.sendUnfulfilledPromiseToGuard();
                     }
 
                     dal.createNextPromiseIfNecessary(promise);
