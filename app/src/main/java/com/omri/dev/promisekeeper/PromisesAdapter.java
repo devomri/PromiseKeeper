@@ -37,7 +37,7 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
             mID = (TextView)view.findViewById(R.id.promise_list_item_id);
             mTitle= (TextView) view.findViewById(R.id.promise_list_item_title);
             mDescription = (TextView) view.findViewById(R.id.promise_list_item_description);
-            mNextDate = (TextView) view.findViewById(R.id.promise_list_item_next_date);
+            mNextDate = (TextView) view.findViewById(R.id.promise_list_item_base_time);
             mIcon = (ImageView)view.findViewById(R.id.promise_list_item_icon);
         }
     }
@@ -77,9 +77,6 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
 
         holder.mID.setText(String.valueOf(position));
         String promiseTitle = currPromise.getmTitle();
-//        if (promiseTitle.length() > 15) {
-//            promiseTitle = promiseTitle.substring(0, 15) + "...";
-//        }
         holder.mTitle.setText(promiseTitle);
         holder.mDescription.setText(currPromise.getmDescription());
         holder.mNextDate.setText(currPromise.getPromiseNextTime());
