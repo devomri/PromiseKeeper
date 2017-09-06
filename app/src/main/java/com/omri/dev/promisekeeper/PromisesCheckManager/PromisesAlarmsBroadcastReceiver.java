@@ -21,11 +21,11 @@ import com.omri.dev.promisekeeper.R;
 public class PromisesAlarmsBroadcastReceiver extends BroadcastReceiver {
 
     @Override
-    public void onReceive(Context context, Intent intent) {
-        PromisesDAL dal = new PromisesDAL(context);
+    public void onReceive(final Context context, Intent intent) {
+        final PromisesDAL dal = new PromisesDAL(context);
 
-        PromiseListItem promise = new PromiseListItem(intent);
-        NotificationManager notificationManager =
+        final PromiseListItem promise = new PromiseListItem(intent);
+        final NotificationManager notificationManager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
         // Cannot verify
@@ -45,31 +45,36 @@ public class PromisesAlarmsBroadcastReceiver extends BroadcastReceiver {
 
         } else {
             PromiseVerifier verifier = new PromiseVerifier(context);
-            Boolean isKept = verifier.verifyPromise(promise);
-            String message = "Promise '" + promise.getmTitle() + "' ";
-            if (isKept) {
-                message += "is kept!";
-                promise.setmPromiseStatus(PromiseStatus.FULFILLED);
-                dal.markPromisefulfilled(promise.getmPromiseID());
-            } else {
-                message += "was not kept";
-                promise.setmPromiseStatus(PromiseStatus.UNFULFILLED);
-                dal.markPromiseAsUnfulfilled(promise.getmPromiseID());
-            }
+            verifier.verifyPromise(promise, new PromiseVerifier.PromiseVerificationResult() {
+                @Override
+                public void onVerificationFinished(boolean isPromiseKept) {
+                    String message = "Promise '" + promise.getmTitle() + "' ";
+                    if (isPromiseKept) {
+                        message += "is kept!";
+                        promise.setmPromiseStatus(PromiseStatus.FULFILLED);
+                        dal.markPromisefulfilled(promise.getmPromiseID());
+                    } else {
+                        message += "was not kept";
+                        promise.setmPromiseStatus(PromiseStatus.UNFULFILLED);
+                        dal.markPromiseAsUnfulfilled(promise.getmPromiseID());
+                    }
 
-            dal.createNextPromiseIfNecessary(promise);
+                    dal.createNextPromiseIfNecessary(promise);
 
-            Intent notificationIntent = promise.toIntent(context, PromiseDetailsActivity.class);
-            PendingIntent pi = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
-            Notification n = new Notification.Builder(context)
-                    .setContentTitle(message)
-                    .setContentText(promise.getmDescription())
-                    .setSmallIcon(R.drawable.ic_done_white) // TODO: change to the application icon
-                    .setAutoCancel(true)
-                    .setContentIntent(pi)
-                    .build();
+                    Intent notificationIntent = promise.toIntent(context, PromiseDetailsActivity.class);
+                    PendingIntent pi = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
+                    Notification n = new Notification.Builder(context)
+                            .setContentTitle(message)
+                            .setContentText(promise.getmDescription())
+                            .setSmallIcon(R.drawable.ic_done_white) // TODO: change to the application icon
+                            .setAutoCancel(true)
+                            .setContentIntent(pi)
+                            .build();
 
-            notificationManager.notify(1, n);
+                    notificationManager.notify(1, n);
+
+                }
+            });
         }
     }
 }

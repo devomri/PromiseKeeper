@@ -32,37 +32,41 @@ public class PromiseVerifier {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(mContext);
     }
 
-    @SuppressWarnings({"MissingPermission"}) // Permission was already taken
-    public boolean verifyPromise(final PromiseListItem promise) {
-        final boolean[] isPromiseKept = {true};
+    public interface PromiseVerificationResult {
+        void onVerificationFinished(boolean isPromiseKept);
+    }
 
+    @SuppressWarnings({"MissingPermission"}) // Permission was already taken
+    public void verifyPromise(final PromiseListItem promise, final PromiseVerificationResult callback) {
         switch (promise.getmPromiseType()) {
             case LOCATION: {
-                // TODO: move it to a callback
                 mFusedLocationClient.getLastLocation()
                         .addOnSuccessListener(new OnSuccessListener<Location>() {
                             @Override
                             public void onSuccess(Location location) {
+                                boolean isPromiseInDistance = true;
+
                                 if (location != null) {
                                     // Check if the promise is within the location
                                     Location promiseLoc = LocationUtils.convertStringToLocation(promise.getmLocation());
                                     if (promiseLoc.distanceTo(location) > MAX_DISTANCE) {
-                                        isPromiseKept[0] = false;
+                                        isPromiseInDistance = false;
                                     }
                                 }
+
+                                callback.onVerificationFinished(isPromiseInDistance);
                             }
                         });
 
                 break;
             }
             case CALL: {
-                isPromiseKept[0] = isCallInLastDay(promise);
+                boolean isCallInLastDay = isCallInLastDay(promise);
+                callback.onVerificationFinished(isCallInLastDay);
 
                 break;
             }
         }
-
-        return isPromiseKept[0];
     }
 
     @SuppressWarnings({"MissingPermission"})
