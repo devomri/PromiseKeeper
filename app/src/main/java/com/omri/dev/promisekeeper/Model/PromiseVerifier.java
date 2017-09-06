@@ -38,6 +38,7 @@ public class PromiseVerifier {
 
         switch (promise.getmPromiseType()) {
             case LOCATION: {
+                // TODO: move it to a callback
                 mFusedLocationClient.getLastLocation()
                         .addOnSuccessListener(new OnSuccessListener<Location>() {
                             @Override

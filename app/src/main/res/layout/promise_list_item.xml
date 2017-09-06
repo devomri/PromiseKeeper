@@ -27,13 +27,13 @@
 
         <TextView
             android:id="@+id/promise_list_item_title"
-            android:layout_width="match_parent"
+            android:layout_width="180sp"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:lines="1"
             android:textColor="@color/from"
             android:textSize="@dimen/msg_text_primary"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/promise_list_item_description"
@@ -95,17 +95,9 @@
         android:id="@+id/promise_list_item_next_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:textColor="@color/timestamp"
         android:textSize="@dimen/timestamp"
         android:textStyle="bold" />
-
-    <ImageView
-        android:id="@+id/icon_star"
-        android:layout_width="@dimen/icon_star"
-        android:layout_height="@dimen/icon_star"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:tint="@color/icon_tint_normal" />
 
 </RelativeLayout>

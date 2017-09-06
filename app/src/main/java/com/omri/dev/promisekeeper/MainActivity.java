@@ -37,9 +37,6 @@ public class MainActivity extends AppCompatActivity
     private RecyclerView.LayoutManager mLayoutManager;
 
     private PromisesDAL mPromisesDAL;
-    private List<PromiseListItem> mFuturePromises;
-    private List<PromiseListItem> mFulfilledPromises;
-    private List<PromiseListItem> mUnfulfilledPromises;
 
     private PromisesAlarmsShooter mPromisesAlarmsShooter;
 
@@ -81,8 +78,6 @@ public class MainActivity extends AppCompatActivity
 
         mPromisesDAL = new PromisesDAL(getApplicationContext());
 
-        fetchPromisesFromDB();
-
         loadFuturePromises();
     }
 
@@ -94,12 +89,6 @@ public class MainActivity extends AppCompatActivity
             Intent i = new Intent(this, PermissionRequestActivity.class);
             startActivityForResult(i, PERMISSION_REQUEST_ACTIVITY_RESULT);
         }
-    }
-
-    private void fetchPromisesFromDB() {
-        mFuturePromises = mPromisesDAL.getFuturePromises();
-        mFulfilledPromises = mPromisesDAL.getFulfilledPromises();
-        mUnfulfilledPromises = mPromisesDAL.getUnfulfilledPromises();
     }
 
     @Override
@@ -174,10 +163,8 @@ public class MainActivity extends AppCompatActivity
             case CREATE_PROMISE_REQUEST_CODE: {
                 if (resultCode == RESULT_OK) {
                     PromiseListItem newPromise = new PromiseListItem(data);
-                    mFuturePromises.add(newPromise);
-                    mAdapter.notifyDataSetChanged();
-
                     mPromisesDAL.createNewPromise(newPromise);
+                    loadFuturePromises();
 
                     mPromisesAlarmsShooter.createAnAlarmForPromise(newPromise);
                 }
@@ -214,19 +201,16 @@ public class MainActivity extends AppCompatActivity
 
     private void loadFuturePromises() {
         setTitle(R.string.future_promises);
-        mFuturePromises = mPromisesDAL.getFuturePromises();
-        mAdapter.updatePromisesDataSet(mFuturePromises);
+        mAdapter.updatePromisesDataSet(mPromisesDAL.getFuturePromises());
     }
 
     private void loadFulfilledPromises() {
         setTitle(R.string.fulfilled_promises);
-        mFulfilledPromises = mPromisesDAL.getFulfilledPromises();
-        mAdapter.updatePromisesDataSet(mFulfilledPromises);
+        mAdapter.updatePromisesDataSet(mPromisesDAL.getFulfilledPromises());
     }
 
     private void loadUnfulfilledPromises() {
         setTitle(R.string.unfulfilled_promises);
-        mUnfulfilledPromises = mPromisesDAL.getUnfulfilledPromises();
-        mAdapter.updatePromisesDataSet(mUnfulfilledPromises);
+        mAdapter.updatePromisesDataSet(mPromisesDAL.getUnfulfilledPromises());
     }
 }
