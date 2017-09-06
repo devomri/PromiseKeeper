@@ -11,7 +11,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.method.DateKeyListener;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,20 +18,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 
 import com.omri.dev.promisekeeper.DAL.PromisesDAL;
 import com.omri.dev.promisekeeper.Model.PromiseListItem;
 import com.omri.dev.promisekeeper.PromisesCheckManager.PromisesAlarmsShooter;
 
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final int CREATE_PROMISE_REQUEST_CODE = 1;
-    private static final int MY_PERMISSIONS_REQUEST = 2;
+    private static final int PERMISSIONS_REQUEST_CODE = 2;
     private static final int PERMISSION_REQUEST_ACTIVITY_RESULT = 3;
+
+    private static final String[] PERMISSIONS_LIST = new String[]{ Manifest.permission.READ_CALL_LOG,
+                                                          Manifest.permission.ACCESS_FINE_LOCATION,
+                                                          Manifest.permission.ACCESS_COARSE_LOCATION,
+                                                          Manifest.permission.SEND_SMS };
 
     private RecyclerView mRecyclerView;
     private PromisesAdapter mAdapter;
@@ -107,10 +108,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void checkForPermissions() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG) == PackageManager.PERMISSION_DENIED ||
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_DENIED ||
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_DENIED ||
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_DENIED) {
+        // Check if there is at least one permission that is not granted
+        boolean isSomePermissionDenied = false;
+
+        for (int i = 0; i < PERMISSIONS_LIST.length && !isSomePermissionDenied ;++i) {
+            isSomePermissionDenied = ActivityCompat.checkSelfPermission(this, PERMISSIONS_LIST[i]) == PackageManager.PERMISSION_DENIED;
+        }
+
+        if (isSomePermissionDenied) {
             // Inform the user
             Intent i = new Intent(this, PermissionRequestActivity.class);
             startActivityForResult(i, PERMISSION_REQUEST_ACTIVITY_RESULT);
@@ -176,12 +181,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             }
             case PERMISSION_REQUEST_ACTIVITY_RESULT: {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_CALL_LOG,
-                                     Manifest.permission.ACCESS_FINE_LOCATION,
-                                     Manifest.permission.ACCESS_COARSE_LOCATION,
-                                     Manifest.permission.SEND_SMS},
-                        MY_PERMISSIONS_REQUEST);
+                ActivityCompat.requestPermissions(this, PERMISSIONS_LIST, PERMISSIONS_REQUEST_CODE);
 
                 break;
             }
@@ -191,12 +191,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST: {
-                if (grantResults.length == 4){
-                    if (grantResults[0] == PackageManager.PERMISSION_DENIED ||
-                        grantResults[1] == PackageManager.PERMISSION_DENIED ||
-                        grantResults[2] == PackageManager.PERMISSION_DENIED ||
-                        grantResults[3] == PackageManager.PERMISSION_DENIED){
+            case PERMISSIONS_REQUEST_CODE: {
+                if (grantResults.length == PERMISSIONS_LIST.length){
+                    boolean isSomePermissionDenied = false;
+
+                    for (int i = 0; i < grantResults.length && !isSomePermissionDenied; i++) {
+                        isSomePermissionDenied = (grantResults[i] == PackageManager.PERMISSION_DENIED);
+                    }
+
+                    if (isSomePermissionDenied){
                         // Re-ask the user
                         checkForPermissions();
                     }
