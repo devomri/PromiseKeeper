@@ -62,9 +62,14 @@ public final class PromiseTable {
             "SELECT * FROM " + TABLE_NAME;
 
     public static final String SQL_GET_ALL_FUTURE_PROMISES =
-            SQL_GET_ALL_PROMISES + " WHERE " + COLUMN_NAME_STATUS + " = 0";
+            SQL_GET_ALL_PROMISES + " WHERE " + COLUMN_NAME_STATUS + " = '0'";
     public static final String SQL_GET_ALL_FULFILLED_PROMISES =
-            SQL_GET_ALL_PROMISES + " WHERE " + COLUMN_NAME_STATUS + " = 1";
+            SQL_GET_ALL_PROMISES + " WHERE " + COLUMN_NAME_STATUS + " = '1'";
     public static final String SQL_GET_ALL_UNFULFILLED_PROMISES =
-            SQL_GET_ALL_PROMISES + " WHERE " + COLUMN_NAME_STATUS + " = 2";
+            SQL_GET_ALL_PROMISES + " WHERE " + COLUMN_NAME_STATUS + " = '2'";
+
+    public static final String SQL_DELETE_FUTURE_PROMISE =
+            "DELETE FROM " + TABLE_NAME +
+                    " WHERE " + COLUMN_NAME_TYPE + " = '0' AND " +
+                    COLUMN_NAME_ID + " = '%s'";
 }

@@ -148,4 +148,12 @@ public class PromisesDAL{
         SQLiteDatabase db = mHelper.getWritableDatabase();
         db.execSQL(sql);
     }
+
+    public void deleteFuturePromise(String promiseID) {
+        String sql =
+                String.format(PromiseTable.SQL_DELETE_FUTURE_PROMISE, promiseID);
+
+        SQLiteDatabase db = mHelper.getWritableDatabase();
+        db.execSQL(sql);
+    }
 }
