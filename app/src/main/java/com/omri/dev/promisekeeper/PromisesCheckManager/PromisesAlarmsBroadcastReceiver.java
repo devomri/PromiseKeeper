@@ -37,7 +37,7 @@ public class PromisesAlarmsBroadcastReceiver extends BroadcastReceiver {
             Notification n = new Notification.Builder(context)
                     .setContentTitle("Did you keep '" + promise.getmTitle() + "'?")
                     .setContentText(promise.getmDescription())
-                    .setSmallIcon(R.drawable.ic_done_white) // TODO: change to the application icon
+                    .setSmallIcon(R.drawable.ic_promise_notification)
                     .setAutoCancel(true)
                     .setContentIntent(pi)
                     .build();
@@ -70,7 +70,7 @@ public class PromisesAlarmsBroadcastReceiver extends BroadcastReceiver {
                     Notification n = new Notification.Builder(context)
                             .setContentTitle(message)
                             .setContentText(promise.getmDescription())
-                            .setSmallIcon(R.drawable.ic_done_white) // TODO: change to the application icon
+                            .setSmallIcon(R.drawable.ic_promise_notification)
                             .setAutoCancel(true)
                             .setContentIntent(pi)
                             .build();
