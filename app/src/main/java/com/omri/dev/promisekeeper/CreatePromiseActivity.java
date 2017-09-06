@@ -29,6 +29,7 @@ import com.omri.dev.promisekeeper.Fragments.TimePickerFragment;
 import com.omri.dev.promisekeeper.Model.PromiseIntervals;
 import com.omri.dev.promisekeeper.Model.PromiseListItem;
 import com.omri.dev.promisekeeper.Model.PromiseTypes;
+import com.omri.dev.promisekeeper.Utils.DateUtils;
 
 import static android.media.CamcorderProfile.get;
 
@@ -107,7 +108,7 @@ public class CreatePromiseActivity extends AppCompatActivity {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         String time = dayOfMonth + "/" + (month + 1) + "/" + year + " " + hourOfDay + ":" + minute;
-                        mPromiseBaseTime.setText(time);
+                        mPromiseBaseTime.setText(DateUtils.reformatDateString(time));
                     }
                 });
                 timeFragment.show(getFragmentManager(), "timePicker");

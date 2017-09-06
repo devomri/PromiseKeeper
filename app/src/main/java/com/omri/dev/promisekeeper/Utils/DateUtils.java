@@ -42,6 +42,10 @@ public class DateUtils {
         return dateString;
     }
 
+    public static String reformatDateString(String dateString) {
+        return convertDateToString(convertStringToDate(dateString));
+    }
+
     public static Date addDays(Date date, int days)
     {
         Calendar cal = Calendar.getInstance();
