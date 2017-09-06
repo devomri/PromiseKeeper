@@ -1,7 +1,9 @@
 package com.omri.dev.promisekeeper;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -79,6 +81,22 @@ public class MainActivity extends AppCompatActivity
         mPromisesDAL = new PromisesDAL(getApplicationContext());
 
         loadFuturePromises();
+
+        showAboutActivityIfFirstTime();
+    }
+
+    private void showAboutActivityIfFirstTime() {
+        SharedPreferences pref = getSharedPreferences("PromiseKeeperPref", Context.MODE_PRIVATE);
+        String about_activity_execution_code = "about_activity_executed";
+
+        if(pref.getBoolean(about_activity_execution_code, true)){
+            Intent aboutIntent = new Intent(this, AboutActivity.class);
+            startActivity(aboutIntent);
+
+            SharedPreferences.Editor ed = pref.edit();
+            ed.putBoolean(about_activity_execution_code, false);
+            ed.apply();
+        }
     }
 
     @Override
