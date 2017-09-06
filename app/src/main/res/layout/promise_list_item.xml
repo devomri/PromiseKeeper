@@ -28,7 +28,8 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:weightSum="1">
             <TextView
                 android:id="@+id/promise_list_item_title"
                 android:layout_width="fill_parent"
@@ -39,7 +40,7 @@
                 android:textSize="@dimen/msg_text_primary"
                 android:textStyle="bold"
                 android:gravity="start"
-                android:layout_weight="1" />
+                android:layout_weight="1"/>
 
             <View
                 android:layout_width="0dp"
@@ -54,7 +55,8 @@
                 android:gravity="end"
                 android:textColor="@color/timestamp"
                 android:textSize="@dimen/timestamp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_weight="1" />
         </LinearLayout>
 
         <TextView
