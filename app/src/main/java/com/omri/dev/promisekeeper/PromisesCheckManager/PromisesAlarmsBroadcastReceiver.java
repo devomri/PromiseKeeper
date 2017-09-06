@@ -19,6 +19,11 @@ import com.omri.dev.promisekeeper.Model.PromiseVerifier;
 import com.omri.dev.promisekeeper.PromiseDetailsActivity;
 import com.omri.dev.promisekeeper.R;
 
+/**
+ * This broadcast receiver is responsible for handling the intents that comes from the
+ * alarm manager shooter.
+ * It verifies the promise fulfillment/unfulfillment
+ */
 public class PromisesAlarmsBroadcastReceiver extends BroadcastReceiver {
 
     @Override

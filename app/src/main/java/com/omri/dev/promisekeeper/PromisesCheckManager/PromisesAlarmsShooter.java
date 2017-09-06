@@ -14,9 +14,8 @@ import com.omri.dev.promisekeeper.Utils.DateUtils;
 import java.util.Calendar;
 
 /**
- * Created by omri on 9/2/17.
+ * This class schedules the future promise verification times
  */
-
 public class PromisesAlarmsShooter {
     private AlarmManager mAlarmManager;
     private Context mContext;

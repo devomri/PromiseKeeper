@@ -11,7 +11,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Created by omri on 8/1/17.
  * This is the basic promise item which is shown in the main activity
  */
 

@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by omri on 9/3/17.
+ * Implements the DAL functionality of the application
  */
 
 public class PromisesDAL{

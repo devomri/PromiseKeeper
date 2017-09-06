@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by omri on 8/31/17.
+ * General date utilities for the app
  */
 
 public class DateUtils {

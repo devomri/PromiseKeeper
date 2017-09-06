@@ -9,7 +9,8 @@ import android.widget.DatePicker;
 import java.util.Calendar;
 
 /**
- * Created by omri on 8/25/17.
+ * General date picker (in the local if the phone)
+ * Chooses year, month and day
  */
 
 public class DatePickerFragment extends DialogFragment {

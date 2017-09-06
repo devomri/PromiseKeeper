@@ -1,7 +1,8 @@
 package com.omri.dev.promisekeeper.Fragments;
 
 /**
- * Created by omri on 8/25/17.
+ * The general time picker of the application
+ * Chooses hour and minute of the day
  */
 
 import android.app.Dialog;

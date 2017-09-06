@@ -1,7 +1,7 @@
 package com.omri.dev.promisekeeper.Model;
 
 /**
- * Created by omri on 8/31/17.
+ * This static class manages the conversions between the application's enums
  */
 
 public class PromiseEnumConvrsions {

@@ -4,7 +4,7 @@ import android.location.Location;
 import android.location.LocationManager;
 
 /**
- * Created by omri on 9/4/17.
+ * General location utilities for the app
  */
 
 public class LocationUtils {

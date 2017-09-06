@@ -17,7 +17,8 @@ import com.omri.dev.promisekeeper.Utils.LocationUtils;
 import java.util.Date;
 
 /**
- * Created by omri on 9/4/17.
+ * The promise verifier class is responsible for verifying the fulfillment/unfulfillment
+ * of the machine-verifiable promises (for now only location and call promises)
  */
 
 public class PromiseVerifier {

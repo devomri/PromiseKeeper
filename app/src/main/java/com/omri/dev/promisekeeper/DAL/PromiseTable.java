@@ -3,7 +3,8 @@ package com.omri.dev.promisekeeper.DAL;
 import java.lang.reflect.Type;
 
 /**
- * Created by omri on 9/5/17.
+ * Represents the single table of the application
+ * (hence all the SQL queries are written here)
  */
 
 public final class PromiseTable {
