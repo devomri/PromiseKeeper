@@ -38,7 +38,7 @@ public class PromisesAlarmsBroadcastReceiver extends BroadcastReceiver {
         if (promise.getmPromiseType() == PromiseTypes.GENERAL) {
             // Ask the user for verification
             Intent askGeneralPromise = promise.toIntent(context, AskGeneralPromiseFulfillment.class);
-            PendingIntent pi = PendingIntent.getActivity(context, 0, askGeneralPromise, PendingIntent.FLAG_ONE_SHOT);
+            PendingIntent pi = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), askGeneralPromise, PendingIntent.FLAG_ONE_SHOT);
             Notification n = new Notification.Builder(context)
                     .setContentTitle("Did you keep '" + promise.getmTitle() + "'?")
                     .setContentText(promise.getmDescription())
@@ -71,7 +71,7 @@ public class PromisesAlarmsBroadcastReceiver extends BroadcastReceiver {
                     dal.createNextPromiseIfNecessary(promise);
 
                     Intent notificationIntent = promise.toIntent(context, PromiseDetailsActivity.class);
-                    PendingIntent pi = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
+                    PendingIntent pi = PendingIntent.getActivity(context, (int) System.currentTimeMillis(), notificationIntent, PendingIntent.FLAG_ONE_SHOT);
                     Notification n = new Notification.Builder(context)
                             .setContentTitle(message)
                             .setContentText(promise.getmDescription())

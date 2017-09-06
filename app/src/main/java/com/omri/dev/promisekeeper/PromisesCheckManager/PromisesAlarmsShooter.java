@@ -29,7 +29,7 @@ public class PromisesAlarmsShooter {
         Calendar promiseTime = DateUtils.convertStringToCalendar(promise.getmBaseTime());
 
         Intent i = promise.toIntent(mContext, PromisesAlarmsBroadcastReceiver.class);
-        PendingIntent pi = PendingIntent.getBroadcast(mContext, 0, i, PendingIntent.FLAG_ONE_SHOT);
+        PendingIntent pi = PendingIntent.getBroadcast(mContext, (int) System.currentTimeMillis(), i, PendingIntent.FLAG_ONE_SHOT);
         mAlarmManager.set(AlarmManager.RTC_WAKEUP,
                 promiseTime.getTimeInMillis(),
                 pi);
