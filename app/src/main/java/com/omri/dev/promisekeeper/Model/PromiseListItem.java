@@ -206,6 +206,7 @@ public class PromiseListItem{
     }
 
     public void sendMessageToGuard(String message) {
+        // Only if there is a guard
         if (mGuardContactNumber.length() > 0) {
             String validPhoneNumber = mGuardContactNumber.replace(" ", "").replace("-","");
 

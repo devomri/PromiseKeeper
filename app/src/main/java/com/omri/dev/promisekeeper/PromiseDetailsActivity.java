@@ -113,7 +113,11 @@ public class PromiseDetailsActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 switch (which){
                     case DialogInterface.BUTTON_POSITIVE: {
+                        // Deletes the promise from the DB
                         promisesDAL.deleteFuturePromise(mPromise.getmPromiseID());
+
+                        // Notify the guard (if exists)
+                        mPromise.sendMessageToGuard("I have just deleted my promise.");
 
                         finish();
                     }
