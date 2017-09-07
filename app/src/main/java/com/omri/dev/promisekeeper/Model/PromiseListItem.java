@@ -7,6 +7,7 @@ import android.telephony.SmsManager;
 import com.omri.dev.promisekeeper.Utils.DateUtils;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -211,9 +212,11 @@ public class PromiseListItem{
             String validPhoneNumber = mGuardContactNumber.replace(" ", "").replace("-","");
 
             SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(validPhoneNumber,
+            String totalMessage = message + " " + toDetaildedText();
+            ArrayList<String> messageParts = smsManager.divideMessage(totalMessage);
+            smsManager.sendMultipartTextMessage(validPhoneNumber,
                     null,
-                    message + " " + toDetaildedText(),
+                    messageParts,
                     null,
                     null);
         }
