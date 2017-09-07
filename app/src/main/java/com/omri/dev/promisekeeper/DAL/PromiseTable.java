@@ -71,6 +71,6 @@ public final class PromiseTable {
 
     public static final String SQL_DELETE_FUTURE_PROMISE =
             "DELETE FROM " + TABLE_NAME +
-                    " WHERE " + COLUMN_NAME_TYPE + " = '0' AND " +
+                    " WHERE " + COLUMN_NAME_STATUS + " = '0' AND " +
                     COLUMN_NAME_ID + " = '%s'";
 }
