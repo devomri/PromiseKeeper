@@ -273,7 +273,7 @@ public class CreatePromiseActivity extends AppCompatActivity {
                                         promiseCallContact);
 
             // If there is a guard - notify him
-            newPromiseItem.sendMessageToGuard("Hi, you were just nominated as a guard for my new promise");
+            newPromiseItem.sendMessageToGuard("Hi, you were just nominated as a guard for my new promise.");
 
             Intent resultIntent = newPromiseItem.toIntent();
             setResult(RESULT_OK, resultIntent);

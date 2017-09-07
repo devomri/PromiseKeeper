@@ -207,8 +207,10 @@ public class PromiseListItem{
 
     public void sendMessageToGuard(String message) {
         if (mGuardContactNumber.length() > 0) {
+            String validPhoneNumber = mGuardContactNumber.replace(" ", "").replace("-","");
+
             SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(mGuardContactNumber,
+            smsManager.sendTextMessage(validPhoneNumber,
                     null,
                     message + " " + toDetaildedText(),
                     null,
