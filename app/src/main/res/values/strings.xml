@@ -70,4 +70,7 @@
     <string name="about_details_item_7">* Location promise - The user issue a location based promise (e.g \'Go to the gym each thursday\'). The user need to provide the location (e.g gym\'s location). and the applciation will validate the promise\'s fulfillment via GPS.</string>
     <string name="about_details_item_8">* Call based promise - The user issue a call based promise (e.g \'Call my grandparents once a month\'). Then, user provides the promise call number (e.g grandparents\' number). Then the application will validate the promise fulfillmet via call log history</string>
     <string name="ok">OK</string>
+    <string name="create_promise_discard_message">Are you sure you want to discard this new promise?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>

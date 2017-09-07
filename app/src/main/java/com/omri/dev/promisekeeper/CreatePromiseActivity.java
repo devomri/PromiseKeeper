@@ -4,6 +4,7 @@ package com.omri.dev.promisekeeper;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.support.annotation.IdRes;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.text.TextUtils;
@@ -279,6 +281,20 @@ public class CreatePromiseActivity extends AppCompatActivity {
             setResult(RESULT_OK, resultIntent);
             finish();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage(R.string.create_promise_discard_message)
+                .setCancelable(false)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        CreatePromiseActivity.super.onBackPressed();
+                    }
+                })
+                .setNegativeButton(R.string.no, null)
+                .show();
     }
 }
 
