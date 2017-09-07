@@ -27,7 +27,7 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
         TextView mID;
         TextView mTitle;
         TextView mDescription;
-        TextView mNextDate;
+        TextView mBaseDate;
         ImageView mIcon;
 
         ViewHolder(View view) {
@@ -37,7 +37,7 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
             mID = (TextView)view.findViewById(R.id.promise_list_item_id);
             mTitle= (TextView) view.findViewById(R.id.promise_list_item_title);
             mDescription = (TextView) view.findViewById(R.id.promise_list_item_description);
-            mNextDate = (TextView) view.findViewById(R.id.promise_list_item_base_time);
+            mBaseDate = (TextView) view.findViewById(R.id.promise_list_item_base_time);
             mIcon = (ImageView)view.findViewById(R.id.promise_list_item_icon);
         }
     }
@@ -79,7 +79,7 @@ class PromisesAdapter extends RecyclerView.Adapter<PromisesAdapter.ViewHolder> {
         String promiseTitle = currPromise.getmTitle();
         holder.mTitle.setText(promiseTitle);
         holder.mDescription.setText(currPromise.getmDescription());
-        holder.mNextDate.setText(currPromise.getPromiseNextTime());
+        holder.mBaseDate.setText(currPromise.getmBaseTime());
 
         if (currPromise.getmPromiseType() == PromiseTypes.GENERAL) {
             holder.mIcon.setImageDrawable(context.getResources().getDrawable(android.R.drawable.ic_popup_reminder));
