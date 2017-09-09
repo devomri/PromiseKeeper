@@ -61,32 +61,7 @@ public class PromisesDAL{
         SQLiteDatabase db = mHelper.getWritableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
         while (cursor.moveToNext()) {
-            String ID = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_ID));
-            String typeString = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_TYPE));
-            String title = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_TITLE));
-            String description = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_DESCRIPTION));
-            String baseTime = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_BASE_TIME));
-            String guardContact = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_GUARD_CONTACT));
-            String intervalString = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_INTERVAL));
-            String location = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_LOCATION));
-            String callContact = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_CALL_CONTACT));
-
-            int intervalInt = Integer.parseInt(intervalString);
-            PromiseIntervals interval = PromiseEnumConvrsions.convertIntToPromiseInterval(intervalInt);
-
-            int typeInt = Integer.parseInt(typeString);
-            PromiseTypes type = PromiseEnumConvrsions.convertIntToPromiseType(typeInt);
-
-            promises.add(new PromiseListItem(type,
-                                            title,
-                                            description,
-                                            baseTime,
-                                            guardContact,
-                                            interval,
-                                            location,
-                                            callContact,
-                                            ID,
-                                            status));
+            promises.add(fetchPromiseListItemFromCursor(cursor));
         }
         cursor.close();
 
@@ -94,6 +69,53 @@ public class PromisesDAL{
         Collections.reverse(promises);
 
         return promises;
+    }
+
+    private PromiseListItem fetchPromiseListItemFromCursor(Cursor cursor) {
+        String ID = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_ID));
+        String typeString = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_TYPE));
+        String statusString = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_STATUS));
+        String title = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_TITLE));
+        String description = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_DESCRIPTION));
+        String baseTime = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_BASE_TIME));
+        String guardContact = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_GUARD_CONTACT));
+        String intervalString = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_INTERVAL));
+        String location = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_LOCATION));
+        String callContact = cursor.getString(cursor.getColumnIndexOrThrow(PromiseTable.COLUMN_NAME_CALL_CONTACT));
+
+        int intervalInt = Integer.parseInt(intervalString);
+        PromiseIntervals interval = PromiseEnumConvrsions.convertIntToPromiseInterval(intervalInt);
+
+        int typeInt = Integer.parseInt(typeString);
+        PromiseTypes type = PromiseEnumConvrsions.convertIntToPromiseType(typeInt);
+
+        int statusInt = Integer.parseInt(statusString);
+        PromiseStatus status = PromiseEnumConvrsions.convertIntToPromiseStatus(statusInt);
+
+        PromiseListItem promiseToReturn =
+                new PromiseListItem(type,
+                        title,
+                        description,
+                        baseTime,
+                        guardContact,
+                        interval,
+                        location,
+                        callContact,
+                        ID,
+                        status);
+
+        return promiseToReturn;
+    }
+
+    public PromiseListItem getPromiseByID(String promiseID) {
+        String sql = String.format(PromiseTable.SQL_GET_PROMISE_BY_ID, promiseID);
+        SQLiteDatabase db = mHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery(sql, null);
+        cursor.moveToNext();
+        PromiseListItem promise = fetchPromiseListItemFromCursor(cursor);
+        cursor.close();
+
+        return promise;
     }
 
     public void markPromiseAsUnfulfilled(String promiseID) {

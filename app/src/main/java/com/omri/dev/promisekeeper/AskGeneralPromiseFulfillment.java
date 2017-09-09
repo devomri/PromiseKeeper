@@ -40,15 +40,19 @@ public class AskGeneralPromiseFulfillment extends AppCompatActivity {
     }
 
     private void changePromiseStatus(PromiseStatus status) {
-        if (status == PromiseStatus.FULFILLED) {
-            mPromisesDAL.markPromisefulfilled(mPromise.getmPromiseID());
-        } else if (status == PromiseStatus.UNFULFILLED) {
-            mPromisesDAL.markPromiseAsUnfulfilled(mPromise.getmPromiseID());
+        // Check If the current status id active
+        PromiseListItem currPromise = mPromisesDAL.getPromiseByID(mPromise.getmPromiseID());
+        if (currPromise.getmPromiseStatus() == PromiseStatus.ACTIVE) {
+            if (status == PromiseStatus.FULFILLED) {
+                mPromisesDAL.markPromisefulfilled(mPromise.getmPromiseID());
+            } else if (status == PromiseStatus.UNFULFILLED) {
+                mPromisesDAL.markPromiseAsUnfulfilled(mPromise.getmPromiseID());
 
-            mPromise.sendUnfulfilledPromiseToGuard();
+                mPromise.sendUnfulfilledPromiseToGuard();
+            }
+
+            mPromisesDAL.createNextPromiseIfNecessary(mPromise);
         }
-
-        mPromisesDAL.createNextPromiseIfNecessary(mPromise);
 
         finish();
     }

@@ -83,7 +83,7 @@ public class PromiseDetailsActivity extends AppCompatActivity {
             case GENERAL: {
                 Date now = new Date();
                 Date promiseDate = DateUtils.convertStringToDate(mPromise.getmBaseTime());
-                if (promiseDate.before(now)) {
+                if (promiseDate.before(now) && mPromise.getmPromiseStatus() == PromiseStatus.ACTIVE) {
                     promiseGeneralAskLayout.setVisibility(View.VISIBLE);
                 }
 
@@ -160,15 +160,18 @@ public class PromiseDetailsActivity extends AppCompatActivity {
     }
 
     private void changePromiseStatus(PromiseStatus status) {
-        if (status == PromiseStatus.FULFILLED) {
-            promisesDAL.markPromisefulfilled(mPromise.getmPromiseID());
-        } else if (status == PromiseStatus.UNFULFILLED) {
-            promisesDAL.markPromiseAsUnfulfilled(mPromise.getmPromiseID());
+        PromiseListItem currPromise = promisesDAL.getPromiseByID(mPromise.getmPromiseID());
+        if (currPromise.getmPromiseStatus() == PromiseStatus.ACTIVE) {
+            if (status == PromiseStatus.FULFILLED) {
+                promisesDAL.markPromisefulfilled(mPromise.getmPromiseID());
+            } else if (status == PromiseStatus.UNFULFILLED) {
+                promisesDAL.markPromiseAsUnfulfilled(mPromise.getmPromiseID());
 
-            mPromise.sendUnfulfilledPromiseToGuard();
+                mPromise.sendUnfulfilledPromiseToGuard();
+            }
+
+            promisesDAL.createNextPromiseIfNecessary(mPromise);
         }
-
-        promisesDAL.createNextPromiseIfNecessary(mPromise);
 
         finish();
     }

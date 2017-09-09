@@ -62,6 +62,10 @@ public final class PromiseTable {
     public static final String SQL_GET_ALL_PROMISES =
             "SELECT * FROM " + TABLE_NAME;
 
+    public static final String SQL_GET_PROMISE_BY_ID =
+            "SELECT * FROM " + TABLE_NAME +
+                    " WHERE " + COLUMN_NAME_ID + " = '%s'";
+
     public static final String SQL_GET_ALL_FUTURE_PROMISES =
             SQL_GET_ALL_PROMISES + " WHERE " + COLUMN_NAME_STATUS + " = '0'";
     public static final String SQL_GET_ALL_FULFILLED_PROMISES =
