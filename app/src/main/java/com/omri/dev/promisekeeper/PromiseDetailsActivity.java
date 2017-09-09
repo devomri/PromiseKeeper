@@ -18,6 +18,9 @@ import com.omri.dev.promisekeeper.Model.PromiseEnumConvrsions;
 import com.omri.dev.promisekeeper.Model.PromiseListItem;
 import com.omri.dev.promisekeeper.Model.PromiseStatus;
 import com.omri.dev.promisekeeper.Model.PromiseTypes;
+import com.omri.dev.promisekeeper.Utils.DateUtils;
+
+import java.util.Date;
 
 public class PromiseDetailsActivity extends AppCompatActivity {
     private TextView promiseTitleTextView;
@@ -32,6 +35,7 @@ public class PromiseDetailsActivity extends AppCompatActivity {
     private TextView promiseCallContactTextView;
     private LinearLayout promiseLocationLayout;
     private TextView promiseLocationTextView;
+    private LinearLayout promiseGeneralAskLayout;
 
     private PromiseListItem mPromise;
     private PromisesDAL promisesDAL;
@@ -55,6 +59,7 @@ public class PromiseDetailsActivity extends AppCompatActivity {
         promiseCallContactTextView = (TextView)findViewById(R.id.promise_details_call_contact);
         promiseLocationLayout = (LinearLayout)findViewById(R.id.promise_details_location_layout);
         promiseLocationTextView = (TextView)findViewById(R.id.promise_details_location);
+        promiseGeneralAskLayout = (LinearLayout)findViewById(R.id.promise_details_general_layout);
 
         mPromise = new PromiseListItem(getIntent());
 
@@ -74,12 +79,28 @@ public class PromiseDetailsActivity extends AppCompatActivity {
             promiseGuardContactLayout.setVisibility(View.VISIBLE);
         }
 
-        if (mPromise.getmPromiseType() == PromiseTypes.LOCATION) {
-            promiseLocationTextView.setText(mPromise.getmLocation());
-            promiseLocationLayout.setVisibility(View.VISIBLE);
-        } else if (mPromise.getmPromiseType() == PromiseTypes.CALL) {
-            promiseCallContactTextView.setText(mPromise.getmCallContactNumber());
-            promiseCallContactLayout.setVisibility(View.VISIBLE);
+        switch (mPromise.getmPromiseType()) {
+            case GENERAL: {
+                Date now = new Date();
+                Date promiseDate = DateUtils.convertStringToDate(mPromise.getmBaseTime());
+                if (promiseDate.before(now)) {
+                    promiseGeneralAskLayout.setVisibility(View.VISIBLE);
+                }
+
+                break;
+            }
+            case LOCATION: {
+                promiseLocationTextView.setText(mPromise.getmLocation());
+                promiseLocationLayout.setVisibility(View.VISIBLE);
+
+                break;
+            }
+            case CALL: {
+                promiseCallContactTextView.setText(mPromise.getmCallContactNumber());
+                promiseCallContactLayout.setVisibility(View.VISIBLE);
+
+                break;
+            }
         }
     }
 
@@ -128,6 +149,28 @@ public class PromiseDetailsActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener)
                 .setNegativeButton("No", dialogClickListener).show();
+    }
+
+    public void promiseKept(View view) {
+        changePromiseStatus(PromiseStatus.FULFILLED);
+    }
+
+    public void promiseIsNotKept(View view) {
+        changePromiseStatus(PromiseStatus.UNFULFILLED);
+    }
+
+    private void changePromiseStatus(PromiseStatus status) {
+        if (status == PromiseStatus.FULFILLED) {
+            promisesDAL.markPromisefulfilled(mPromise.getmPromiseID());
+        } else if (status == PromiseStatus.UNFULFILLED) {
+            promisesDAL.markPromiseAsUnfulfilled(mPromise.getmPromiseID());
+
+            mPromise.sendUnfulfilledPromiseToGuard();
+        }
+
+        promisesDAL.createNextPromiseIfNecessary(mPromise);
+
+        finish();
     }
 }
 

@@ -73,4 +73,5 @@
     <string name="create_promise_discard_message">Are you sure you want to discard this new promise?</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="promise_details_general_ask">Did you keep this promise?</string>
 </resources>
