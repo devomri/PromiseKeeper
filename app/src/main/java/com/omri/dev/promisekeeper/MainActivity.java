@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity
             loadFuturePromises();
         } else if (navigationView.getMenu().findItem(R.id.nav_fulfilled_promises).isChecked()) {
             loadFulfilledPromises();
-        } else if (navigationView.getMenu().findItem(R.id.nav_future_promises).isChecked()) {
+        } else if (navigationView.getMenu().findItem(R.id.nav_unfulfilled_promises).isChecked()) {
             loadUnfulfilledPromises();
         }
     }
